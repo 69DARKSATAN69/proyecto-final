@@ -3,13 +3,26 @@
     <h1><link-button link="">Game</link-button></h1>
             <nav>
         <ul>
+            <li>
             <link-button link="/intro">This World</link-button>
+        </li>
+        <li>
             <link-button link="/features">Features</link-button>
+        </li>
+            <li>
             <link-button link="/about">About</link-button>
+        </li>
+            <li>
             <link-button link="/contact">Contact</link-button>
+        </li>
+            <li>
             <link-button link="/playthroughs">Playthroughs</link-button>
+        </li>
+            <li>
             <link-button link="/users">Users</link-button>
-            <link-button link='/auth'>Log in</link-button>
+        </li>
+            <link-button link='/auth' v-if="!isLoggedIn">Log in</link-button>
+            
         </ul>
     </nav>
     
@@ -18,6 +31,19 @@
 
 
 </template>
+
+
+<script>
+export default {
+computed: {
+    isLoggedIn(){
+        return this.$store.getters.isAuthenticated;
+    }
+}
+
+}
+</script>
+
 
 <style scoped>
 header{
@@ -57,7 +83,7 @@ ul
 
 }
 li{
-    padding: 0.75rem 0.75rem;
+    padding: 0.75rem;
   
     
 }

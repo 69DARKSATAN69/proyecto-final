@@ -29,6 +29,7 @@ a{
     cursor: pointer;
     border-radius: 20px;
     color: #111c1e;
+    border: 5px groove transparent;
 
 }
 

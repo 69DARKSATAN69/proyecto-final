@@ -15,14 +15,14 @@
    
     <base-card class="irkala">
     <h3>The world of Irkala</h3>
-    <p>World is a nice word. It doesn't imply astronomical realities and geometries like 'planet' does, or being yoked to a sentient civilization like 'realm'. It doesn't even imply an actual terrain composition like 'land' or 'sea' would.</p>
+    <p>World is a nice word. It doesn't imply astronomical realities and geometries like 'planet' does, or being yoked to a sentient civilization like 'realm'. It doesn't even imply an actual terrain composition like 'land' would.</p>
     <p>That's what Irkala is, in the end. A world.</p>
     <p>There is no real sense of how long it has existed or whether or not said existence is finite. There is also no real sense of life on it as we understand it.</p>
     <p>That is not to say it is a barren wasteland however, far from it. There is plenty of light, blue skies, fresh air and both vegetation and the water that sustains it. Weather changes, days become colder or warmer, rain falls, the wind blows heavily or remains a gentle breeze.</p>
-    <p>Despite how familiar all of these things sound however, close observation of plants, the land, the movement of water and so on doesn't quite feel right. Like an impressionist painting, familiar shapes and forms give way under close scrutiny.</p>
-    <p>Not that close scrutiny would be needed for everything, however. Take the massive creatures that grow in this place, for example.</p>
+    <p>Despite how familiar all of these things sound however, close observation of plants, the land, the movement of water and so on doesn't feel quite right. Like an impressionist painting, familiar shapes and forms give way under close scrutiny.</p>
+    <p>Not that close scrutiny would be needed for everything, however. Take the massive creatures that grow in this place.</p>
     <p>For reasons you cannot quite fathom -just having arrived here after all- this world is home to a growing menagerie of beast-like titans. Much like everything else in Irkala,
-      they look similar to other animals you're familiar with from home but are just different enough to be somewhat unnerving. Mostly because of the ridiculous size they 
+      they look similar to other animals you're familiar with but are just different enough to be somewhat unnerving. Mostly because of the ridiculous size they 
       seem to be able to naturally achieve.</p>
       <p>And lucky you, you stumbled into one of them just now hatching from its egg. Seems you have something (or someone) to care for.</p>
   </base-card>

@@ -5,7 +5,6 @@ import LinkButton from './components/ui/LinkButton.vue';
 import BaseCard from './components/ui/BaseCard.vue';
 import TheHeader from './components/ui/TheHeader.vue';
 import BaseButton from './components/ui/BaseButton.vue';
-
 import store from './store/index.js';
 const app = createApp(App);
 

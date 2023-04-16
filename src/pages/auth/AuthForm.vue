@@ -13,6 +13,12 @@
 <base-button mode="wallflower" @click="changeMode">{{login ? 'Would you rather register?' : 'You might want to log in instead' }}</base-button>
 </div>
 </form>
+<div class="error-control" v-if="error">
+    <p>{{ error }}</p>
+</div>
+<div class="loading-control" v-if="isLoading">
+    <p>Reticulating splines...</p>
+</div>
 </base-card>
 </div>
 
@@ -26,29 +32,38 @@ export default {
             login: true,
             formIsValid: true,
             email: '',
-            password: ''
+            password: '',
+            isLoading: false,
+            error: null
         };
     },
     methods: {
         changeMode(){
             this.login = !this.login;
         },
-        submitForm(){
+        async submitForm(){
             this.formIsValid = true;
+            this.error = null;
             if(this.email === '' || !this.email.includes('@') || this.password.length < 6){
                 this.formIsValid = false;
-                alert('Invalid form!');
+                this.error = "Failure to comply. Please enter a proper e-mail and a password of at least six letters.";
                 return;
             }
-        
-            if(this.mode === 'login'){
-                //....
-            }else{
-                this.$store.dispatch('signup', {
+            this.isLoading = true;
+            const actionPayload = {
                     email: this.email,
                     password: this.password
-                });
+                };
+        try{
+            if(this.login){
+                await this.$store.dispatch('login', actionPayload);
+            }else{
+              await this.$store.dispatch('signup', actionPayload);
             }
+        }catch(err){
+            this.error = err.message || 'Failure to comply.';
+        }
+            this.isLoading = false;
         }
     }
 }
@@ -92,4 +107,9 @@ input{
     width: 70%;
 }
 
+.error-control{
+    text-align: center;
+    color: red;
+    border: 5px groove crimson;
+}
 </style>

@@ -1,4 +1,4 @@
 <template>
-<h1>Placeholder ahoy</h1>
+<user-list></user-list>
 
 </template>

@@ -7,7 +7,8 @@ state(){
     return {
         userId: null,
         token: null,
-        tokenExpiration: null
+        tokenExpiration: null,
+        isAdmin: null
     };
 },
 getters,

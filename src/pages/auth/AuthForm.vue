@@ -3,6 +3,9 @@
 <base-card>
 <form>
     <div class="form-data">
+        <input type="text" name="username" placeholder="Your username please" v-model='userName' v-if="!login"/>
+        </div>
+    <div class="form-data">
 <input type="email" name="email" placeholder="Your E-mail please" v-model='email'/>
 </div>
 <div class="form-data">
@@ -31,6 +34,7 @@ export default {
         return {
             login: true,
             formIsValid: true,
+            userName: '',
             email: '',
             password: '',
             isLoading: false,
@@ -42,23 +46,39 @@ export default {
             this.login = !this.login;
         },
         async submitForm(){
+            const uniqueUsername = await fetch('https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users.json');
+            const jsonUsername = await uniqueUsername.json();
+            console.log(jsonUsername);
+            
             this.formIsValid = true;
             this.error = null;
+            if(!this.login){
+                if(this.userName === ''){
+                    this.formIsValid = false;
+                    this.error = "Failure to comply. Please enter a username."
+                    return;
+                }else{
+                   
+                  for(let key in jsonUsername){
+                    if(this.userName === key){
+                        this.error = "Failure to comply. User name is taken."
+                        return;
+                    }
+                  }
+                }
+            }
             if(this.email === '' || !this.email.includes('@') || this.password.length < 6){
                 this.formIsValid = false;
                 this.error = "Failure to comply. Please enter a proper e-mail and a password of at least six letters.";
                 return;
             }
             this.isLoading = true;
-            const actionPayload = {
-                    email: this.email,
-                    password: this.password
-                };
+
         try{
             if(this.login){
-                await this.$store.dispatch('login', actionPayload);
+                await this.$store.dispatch('login', {email: this.email, password: this.password});
             }else{
-              await this.$store.dispatch('signup', actionPayload);
+              await this.$store.dispatch('signup', {username: this.userName, email: this.email, password: this.password});
             }
         }catch(err){
             this.error = err.message || 'Failure to comply.';

@@ -35,6 +35,10 @@ div{
  
 }
 
+.wallflower{
+    border: 1px solid transparent;
+}
+
 .wallflower:hover{
     border: 1px solid burlywood;
     background-color: rgb(222,184,135, 0.2);

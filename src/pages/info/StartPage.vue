@@ -6,7 +6,7 @@
     <p>You see your life flashing before your eyes, all the good times, the bad times, your friends and family and even a few enemies.</p>
     <p>That's what I'd like to tell you anyway, but in reality you don't really see or remember much of all. Not because of any older memories being lost to time, or your brain's somewhat critical situation making them flicker and burn out.</p>
     <p>There simply wasn't that much to remember anyway.</p>
-    <p>The end came to you like it comes to most people, in a regular day in a nondescript week. There was no gravitas to it, no skillful foreshadowing the monday before, no cryptic last conversation. It simply happened. </p>
+    <p>The end came to you like it comes to most people, in a regular day in a nondescript week. There was no gravitas to it, no dramatic foreshadowing happening during the previous monday, no cryptic last conversation. It simply happened. </p>
     <p>None of that really matters now anyway. Your mind only has room for one question right now.</p>
     <h4>Just where the hell am I?</h4>
     </base-card>

@@ -8,7 +8,8 @@ state(){
         userId: null,
         token: null,
         tokenExpiration: null,
-        isAdmin: null
+        isAdmin: null,
+        canNavigate: null
     };
 },
 getters,

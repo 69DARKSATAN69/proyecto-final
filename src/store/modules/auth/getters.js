@@ -11,5 +11,8 @@ export default {
     },
     isAdmin(state){
         return state.isAdmin;
+    },
+    canNavigate(state){
+        return state.canNavigate;
     }
 };

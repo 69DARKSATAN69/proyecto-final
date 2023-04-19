@@ -32,6 +32,7 @@ div{
 }
 .flytrap:hover{
     background-color: rgb(222,184,135, 0.6);
+    cursor: pointer;
  
 }
 
@@ -43,6 +44,9 @@ div{
     border: 1px solid burlywood;
     background-color: rgb(222,184,135, 0.2);
     color: #372e21;
+    cursor: pointer;
 
 }
+
+
 </style>

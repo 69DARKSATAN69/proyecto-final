@@ -22,6 +22,7 @@
 <div class="loading-control" v-if="isLoading">
     <p>Reticulating splines...</p>
 </div>
+
 </base-card>
 </div>
 
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -38,7 +40,9 @@ export default {
             email: '',
             password: '',
             isLoading: false,
-            error: null
+            error: null,
+            userNumber: this.$uuid.v4(),
+            
         };
     },
     methods: {
@@ -78,12 +82,21 @@ export default {
             if(this.login){
                 await this.$store.dispatch('login', {email: this.email, password: this.password});
             }else{
-              await this.$store.dispatch('signup', {username: this.userName, email: this.email, password: this.password});
+            this.generateId();
+              await this.$store.dispatch('signup', {username: this.userName, email: this.email, password: this.password, userNumber: this.userNumber});
+         
             }
         }catch(err){
             this.error = err.message || 'Failure to comply.';
         }
             this.isLoading = false;
+        },
+        generateId(){
+       
+        this.userNumber = null;
+        this.userNumber = this.$uuid.v4();
+    
+
         }
     }
 }

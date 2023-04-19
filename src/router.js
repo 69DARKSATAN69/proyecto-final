@@ -9,7 +9,8 @@ import CombatFeature from './pages/info/features/CombatFeature.vue';
 import RpgElements from './pages/info/features/RpgElements.vue';
 import PublicRanking from './pages/info/features/PublicRanking.vue';
 import MiniGames from './pages/info/features/MiniGames.vue';
-import UsersList from './pages/auth/UsersList.vue';
+import UserList from './components/lists/UserList.vue';
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -25,10 +26,10 @@ const router = createRouter({
             {path: '/features/4', component: PublicRanking},
             {path: '/features/5', component: MiniGames}
         ]},
-        {path: '/contact', component: UsersList},
+        {path: '/contact', component: NotFound},
         {path: '/about', component: AboutUs},
-        {path: '/playthroughs', component: UsersList},
-        {path: '/users', component: UsersList},
+        {path: '/playthroughs', component: NotFound},
+        {path: '/users', component: UserList},
         {path: '/:notFound(.*)', component: NotFound}
     ],
 })

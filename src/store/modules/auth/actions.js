@@ -30,9 +30,12 @@ export default {
     //Esta parte guarda los datos en el modulo de auth de firebase. Probablemente tendre que borrarlo.
    const userData = {
         username: payload.username,
+        canNavigate: true,
         email: payload.email,
         password: payload.password,
         returnSecureToken: true,
+        userNumber: payload.userNumber
+
       
     };
      const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD9fbj0YepcSEm7ReuMjFhSX4woOfV9Qlk',
@@ -50,9 +53,9 @@ export default {
         }
         console.log(userData);
         //A partir de aqui guarda los usuarios en la base de datos. Probablemente tendre que mantener esto.
-        const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users/${userData.username}.json`, {
+        const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users/${userData.userNumber}.json`, {
             method: 'PUT',
-            body: JSON.stringify({username: userData.username, email: userData.email, password: userData.password}),
+            body: JSON.stringify({username: userData.username, email: userData.email, canNavigate: userData.canNavigate, userNumber: userData.userNumber}),
         });
         const response2Data = await response2.json();
         if(!response2.ok){
@@ -60,7 +63,7 @@ export default {
             const error = new Error(response2Data.error.message || "Saving the user's data in the database did not work as expected");
             throw error;
         }
-
+        //Esta parte guarda los datos en la store de vuex
         context.commit('setUser', {
             token: responseData.idToken,
             userId: responseData.localId,
@@ -74,11 +77,36 @@ export default {
         tokenExpiration: null
     });
 },
-    async getUsers(){
-        const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyD9fbj0YepcSEm7ReuMjFhSX4woOfV9Qlk', {
-            method: 'POST'
+//Esta funcion es para que los admins puedan capar o no la navegacion del usuario
+    async toggleNavigation(_, payload){
+        const response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users/${payload.userNumber}.json`, {
+            method: 'PUT',
+            body: JSON.stringify({canNavigate: payload.canNavigate, email: payload.email, username: payload.username, userNumber: payload.userNumber}),
         });
-        console.log(response);
+        const responseData = await response.json();
+        if(!response.ok){
+            console.log(responseData);
+            const error = new Error(responseData.error.message || 'The server dislikes you. Get out. (but seriously, the request was performed incorrectly)');
+            throw error;
+      
+        }
+
+
+},
+//Esta funcion esta hecha para pruebas, comprueba los datos del usuario seleccionado
+async grabNavigation(_, payload) {
+    
+      const response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users/${payload.username}.json`);
+      const data = await response.json();
+      if(!response.ok){
+        console.log(data);
+        const error = new Error(data.error.message || 'The server dislikes you. Get out. (but seriously, the request was performed incorrectly)');
+        throw error;
+  
     }
 
-};
+    },
+
+
+
+}

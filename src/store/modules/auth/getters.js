@@ -6,6 +6,9 @@ export default {
     token(state){
         return state.token;
     },
+    userEmail(state){
+        return state.userEmail;
+    },
     isAuthenticated(state){
         return !!state.token;
     },

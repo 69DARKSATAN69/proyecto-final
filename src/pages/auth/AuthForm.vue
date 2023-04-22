@@ -3,13 +3,13 @@
 <base-card>
 <form>
     <div class="form-data">
-        <input type="text" name="username" placeholder="Your username please" v-model='userName' v-if="!login"/>
+        <input type="text" name="username" placeholder="Your username please" v-model.trim='userName' v-if="!login"/>
         </div>
     <div class="form-data">
-<input type="email" name="email" placeholder="Your E-mail please" v-model='email'/>
+<input type="email" name="email" placeholder="Your E-mail please" v-model.trim='email'/>
 </div>
 <div class="form-data">
-<input type="password" name="password" placeholder="Your password please" v-model="password"/> 
+<input type="password" name="password" placeholder="Your password please" v-model.trim="password"/> 
 </div>
 <div class="button-control">
 <base-button mode="flytrap" id="logControl" @click="submitForm">{{login ? 'Log In' : 'Register' }}</base-button>
@@ -140,9 +140,5 @@ input{
     width: 70%;
 }
 
-.error-control{
-    text-align: center;
-    color: red;
-    border: 5px groove crimson;
-}
+
 </style>

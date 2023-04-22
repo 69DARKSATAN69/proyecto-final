@@ -9,7 +9,8 @@ import CombatFeature from './pages/info/features/CombatFeature.vue';
 import RpgElements from './pages/info/features/RpgElements.vue';
 import PublicRanking from './pages/info/features/PublicRanking.vue';
 import MiniGames from './pages/info/features/MiniGames.vue';
-import UserList from './components/lists/UserList.vue';
+import UserList from './pages/admin/UserList.vue';
+import ContactForm from './components/forms/ContactForm.vue';
 
 
 const router = createRouter({
@@ -26,7 +27,7 @@ const router = createRouter({
             {path: '/features/4', component: PublicRanking},
             {path: '/features/5', component: MiniGames}
         ]},
-        {path: '/contact', component: NotFound},
+        {path: '/contact', component: ContactForm},
         {path: '/about', component: AboutUs},
         {path: '/playthroughs', component: NotFound},
         {path: '/users', component: UserList},

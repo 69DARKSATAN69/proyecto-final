@@ -18,6 +18,7 @@ export default {
             throw error;
         }
         context.commit('setUser', {
+            email: responseData.email,
             token: responseData.idToken,
             userId: responseData.localId,
             tokenExpiration: responseData.expiresIn
@@ -65,6 +66,7 @@ export default {
         }
         //Esta parte guarda los datos en la store de vuex
         context.commit('setUser', {
+            email: responseData.email,
             token: responseData.idToken,
             userId: responseData.localId,
             tokenExpiration: responseData.expiresIn
@@ -72,6 +74,7 @@ export default {
     },
     logout(context){
         context.commit('setUser', {
+        email: null,
         token: null,
         userId: null,
         tokenExpiration: null

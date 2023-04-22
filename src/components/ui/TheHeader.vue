@@ -13,7 +13,7 @@
             <link-button link="/about" v-if="!isAdministrator">About</link-button>
         </li>
             <li>
-            <link-button link="/contact" v-if="!isAdministrator">Contact</link-button>
+            <link-button link="/contact" v-if="!isAdministrator && isLoggedIn">Contact</link-button>
         </li>
             <li>
             <link-button link="/playthroughs">Playthroughs</link-button>

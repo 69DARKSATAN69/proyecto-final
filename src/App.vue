@@ -27,4 +27,18 @@ margin-left: 1em;
 margin-right: 1em;
 
 }
+
+.error-control{
+  margin: 3vh 0;
+  text-align: center;
+  color: crimson;
+  border: 5px groove crimson;
+}
+
+.success-control{
+  margin: 3vh 0;
+  text-align: center;
+  border: 1px solid bisque;
+  color: bisque;
+}
 </style>

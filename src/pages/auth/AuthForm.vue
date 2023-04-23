@@ -84,8 +84,8 @@ export default {
             }else{
             this.generateId();
               await this.$store.dispatch('signup', {username: this.userName, email: this.email, password: this.password, userNumber: this.userNumber});
-         
-            }
+         }
+         this.$router.replace('/');
         }catch(err){
             this.error = err.message || 'Failure to comply.';
         }

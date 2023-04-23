@@ -10,7 +10,9 @@ import RpgElements from './pages/info/features/RpgElements.vue';
 import PublicRanking from './pages/info/features/PublicRanking.vue';
 import MiniGames from './pages/info/features/MiniGames.vue';
 import UserList from './pages/admin/UserList.vue';
-import ContactForm from './components/forms/ContactForm.vue';
+import ContactForm from './pages/contact/ContactForm.vue';
+import ListComments from './pages/contact/ListComments.vue';
+import store from './store/index.js';
 
 
 const router = createRouter({
@@ -18,7 +20,7 @@ const router = createRouter({
     routes: [
         {path: '/', redirect: '/intro'},
         {path: '/intro', component: StartPage},
-        {path: '/game', component: null},
+        {path: '/game', component: NotFound, meta: {mustBeLogged: true}},
         {path: '/auth', component: AuthForm},
         {path: '/features', component: OurFeatures, children: [
             {path: '/features/1', component: GrowingMonster},
@@ -27,12 +29,29 @@ const router = createRouter({
             {path: '/features/4', component: PublicRanking},
             {path: '/features/5', component: MiniGames}
         ]},
-        {path: '/contact', component: ContactForm},
+        {path: '/contact', component: ContactForm, meta: {mustBeLogged: true}},
+        {path: '/comments', component: ListComments, meta: {mustBeAdmin: true}},
         {path: '/about', component: AboutUs},
         {path: '/playthroughs', component: NotFound},
-        {path: '/users', component: UserList},
+        {path: '/users', component: UserList, meta: {mustBeAdmin: true}},
         {path: '/:notFound(.*)', component: NotFound}
     ],
+});
+
+router.beforeEach((to, from, next)=>{
+if(store.getters.canNavigate){
+if(to.meta.mustBeLogged && !store.getters.isAuthenticated){
+    next('/auth');
+    return;
+}
+if((to.meta.mustBeAdmin) && !store.getters.isAdmin){
+    next('/');
+    return;
+}
+next();
+}else{
+    next(false);
+}
 })
 
 export default router;

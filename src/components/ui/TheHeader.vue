@@ -15,6 +15,9 @@
             <li>
             <link-button link="/contact" v-if="!isAdministrator && isLoggedIn">Contact</link-button>
         </li>
+        <li>
+            <link-button link="/comments" v-if="isAdministrator && isLoggedIn">Comments</link-button>
+        </li>
             <li>
             <link-button link="/playthroughs">Playthroughs</link-button>
         </li>
@@ -49,6 +52,7 @@ computed: {
 methods:{
     logOut(){
         this.$store.dispatch('logout');
+        this.$router.replace('/');
     }
 }
 

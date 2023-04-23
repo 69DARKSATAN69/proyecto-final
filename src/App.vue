@@ -1,5 +1,5 @@
 <template>
-  <the-header></the-header>
+<the-header></the-header>
 <router-view></router-view>
 <the-footer></the-footer>
 </template>
@@ -18,6 +18,7 @@ body{
   background-image: url('./assets/fondoTodo.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
+
 }
 #app{
 font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -38,7 +39,13 @@ margin-right: 1em;
 .success-control{
   margin: 3vh 0;
   text-align: center;
-  border: 1px solid bisque;
+  border: 5px solid bisque;
   color: bisque;
 }
+
+input{
+  background-color: #FAF0E6;
+  color: #111c1e;
+}
+
 </style>

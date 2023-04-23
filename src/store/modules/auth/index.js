@@ -10,7 +10,7 @@ state(){
         token: null,
         tokenExpiration: null,
         isAdmin: null,
-        canNavigate: null
+        canNavigate: true
     };
 },
 getters,

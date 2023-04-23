@@ -26,9 +26,11 @@ export default {
             userEmail: '',
             commentField: '',
             dateStamp: null,
+            commentId: null,
             error: null,
             success: false,
-            isLoading: false
+            isLoading: false,
+          
 
         };
     },
@@ -42,10 +44,10 @@ methods: {
     async handleSubmit(){
         this.isLoading = true;
         let response;
-        const comment = {userEmail: this.userEmail, commentField: this.commentField, dateStamp: this.dateStamp};
+        const comment = {userEmail: this.userEmail, commentField: this.commentField, dateStamp: this.dateStamp, commentId: this.commentId};
         try{
-        response = await fetch('https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments.json', {
-            method: 'POST',
+        response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments/${comment.commentId}.json`, {
+            method: 'PUT',
             body: JSON.stringify(comment)
     });
         let responseData = await response.json();
@@ -59,6 +61,7 @@ if(response.ok){
 this.success = true;
 }
 this.isLoading = false;
+this.generateId();
 }
 
     },
@@ -84,13 +87,21 @@ this.dateStamp = `${y}-${m}-${d8} ${h}:${min}`;
         return;
     }
     this.handleSubmit();
- }
+ },
+ generateId(){
+       
+       this.commentId = null;
+       this.commentId = this.$uuid.v4();
+   
+
+       }
 
 
 },
 mounted() {
    this.setDataEmail();
    this.setDateStamp();
+   this.generateId();
 }
 }
 
@@ -105,6 +116,9 @@ span{
 textarea{
     width: 100%;
     margin: 5vh 0;
+    border: 1px solid burlywood;
+    font-size: 1.3rem;
+    background-color:#FAF0E6 ;
 }
 
 .button-control{

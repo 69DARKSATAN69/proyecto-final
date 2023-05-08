@@ -8,6 +8,7 @@ import BaseButton from './components/ui/BaseButton.vue';
 import TheFooter from './components/ui/TheFooter.vue';
 import store from './store/index.js';
 import BaseDialog from './components/ui/BaseDialog.vue';
+import GameCard from './components/game/GameCard.vue';
 import withUUID from "vue-uuid";
 
 const app = createApp(App);
@@ -20,4 +21,5 @@ app.component('the-header', TheHeader);
 app.component('the-footer', TheFooter);
 app.component('link-button', LinkButton);
 app.component('base-dialog', BaseDialog);
+app.component('game-card', GameCard);
 app.mount('#app');

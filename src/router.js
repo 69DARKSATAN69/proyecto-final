@@ -12,6 +12,7 @@ import MiniGames from './pages/info/features/MiniGames.vue';
 import UserList from './pages/admin/UserList.vue';
 import ContactForm from './pages/contact/ContactForm.vue';
 import ListComments from './pages/contact/ListComments.vue';
+import TheGame from './pages/game/TheGame.vue';
 import store from './store/index.js';
 
 
@@ -20,7 +21,7 @@ const router = createRouter({
     routes: [
         {path: '/', redirect: '/intro'},
         {path: '/intro', component: StartPage},
-        {path: '/game', component: NotFound, meta: {mustBeLogged: true}},
+        {path: '/play', component: TheGame, meta: {mustBeLogged: true}},
         {path: '/auth', component: AuthForm},
         {path: '/features', component: OurFeatures, children: [
             {path: '/features/1', component: GrowingMonster},

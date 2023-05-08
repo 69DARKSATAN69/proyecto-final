@@ -1,6 +1,6 @@
 <template>
-<header>
-    <h1><link-button link="">Game</link-button></h1>
+<header v-if="!isInGame">
+    <h1><link-button link="/play">Game</link-button></h1>
             <nav>
         <ul>
             <li>
@@ -47,6 +47,9 @@ computed: {
     },
     isAdministrator(){
         return this.$store.getters.isAdmin;
+    },
+    isInGame(){
+        return this.$store.getters.gameStage;
     }
 },
 methods:{

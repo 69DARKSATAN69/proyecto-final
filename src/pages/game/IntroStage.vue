@@ -13,6 +13,10 @@
 <p>The hole in front of you, however, contains something that could certainly be considered fancy.</p>
 <p>If massive eggs, or at least egg-shaped boulders are your thing, anyway.</p>
 </base-card>
+<input type="text" placeholder="Name your companion and press on the image below" v-model.trim="monsterName">
+<div class="error-control" v-if="error">
+    <p>{{ error }}</p>
+</div>
 <figure @click="advanceStage">
     <img src="./../../assets/eggInPlains.png" alt="a giant egg in the plains">
 </figure>
@@ -21,16 +25,41 @@
 </template>
 
 <script>
+
 export default {
+    data() {
+        return {
+            monsterName: '',
+            error: null
+        };
+    },
     computed: {
         whatStage(){
+            
             return this.$store.getters.gameStage;
         },
     },
 methods: {
-advanceStage(){
-    this.$store.dispatch('advanceStage');
+async setupMonster(){
+   await this.$store.dispatch('InitMonsterData', {stage: 'stage1', type:'Geon', name: this.monsterName});
 },
+
+async advanceStage(){
+    if(this.monsterName === ''){
+
+     this.handleNameError()}
+    else{
+        try{
+        await this.setupMonster();
+        }catch(err){
+            this.error = err || "The server thinks you are wearing white socks. But really, it doesn't work right now, try again later";
+        }
+     this.$store.dispatch('advanceStage');
+    }
+},
+handleNameError(){
+this.error = 'Please input a name';
+}
 },
 }
 </script>

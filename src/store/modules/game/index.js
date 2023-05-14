@@ -6,11 +6,13 @@ import mutations from './mutations.js';
 export default {
     state(){
         return {
+            gameDays: null,
             gameStage: null,
             monsterStatus: {type: null,  name: null, hunger: null, attributes: {hp: null, str: null, spi: null}},
             enemyStatus: {type: null, name: null, attributes: {hp: null, dmg: null}},
             inventory: null,
             currentZone: null,
+         
 
         };
     },

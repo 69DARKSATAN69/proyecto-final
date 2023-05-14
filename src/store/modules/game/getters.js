@@ -18,6 +18,16 @@ export default {
 
     getZone(state){
         return state.currentZone;
+    },
+    
+    getDays(state){
+        return state.gameDays;
+    },
+    getName(state){
+        return state.monsterStatus.name;
+    },
+    getHunger(state){
+        return state.monsterStatus.hunger;
     }
 
 

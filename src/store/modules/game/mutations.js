@@ -18,9 +18,18 @@ export default {
 
     setZone(state, payload){
         state.currentZone = payload;
+    },
+
+   setDays(state, payload){
+    state.gameDays = payload;
+   },
+
+    newDay(state){
+        state.gameDays+=1;
+    },
+
+    removeDays(state){
+        state.gameDays = null;
     }
-
-
-
 
 }

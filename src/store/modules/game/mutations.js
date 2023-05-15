@@ -30,6 +30,18 @@ export default {
 
     removeDays(state){
         state.gameDays = null;
+    },
+    setEnergy(state, payload){
+        state.energy = payload;
+    },
+    lowerEnergy(state){
+        console.log(state.energy);
+        state.energy = state.energy-1 >= 0 ? state.energy-1 : 0; 
+        console.log(state.energy);
+
+    },
+    raiseMonsterSpi(state, payload){
+        state.monsterStatus.attributes.spi += payload;
     }
 
 }

@@ -28,6 +28,12 @@ export default {
     },
     getHunger(state){
         return state.monsterStatus.hunger;
+    },
+    getMonsterStage(state){
+        return state.monsterStatus.stage;
+    },
+    getEnergy(state){
+        return state.energy;
     }
 
 

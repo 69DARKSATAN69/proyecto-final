@@ -1,15 +1,18 @@
 <template>
 <intro-stage v-if="whatStage === 1"></intro-stage>
 <status-stage v-if="whatStage === 2"></status-stage>
+<tic-tac-toe v-if="whatStage === 4"></tic-tac-toe>
 </template>
 
 <script>
 import IntroStage from './IntroStage.vue';
 import StatusStage from './StatusStage.vue';
+import TicTacToe from './TicTacToe.vue';
 export default {
     components: {
         IntroStage,
-        StatusStage
+        StatusStage,
+        TicTacToe,
     },
     data(){
     return {

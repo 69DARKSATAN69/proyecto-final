@@ -42,6 +42,12 @@ export default {
     },
     raiseMonsterSpi(state, payload){
         state.monsterStatus.attributes.spi += payload;
+    },
+    feedMonster(state, payload){
+        state.monsterStatus.hunger = state.monsterStatus.hunger + payload > 100 ? 100 : state.monsterStatus.hunger+payload;
+    },
+    monsterHungers(state, payload){
+        state.monsterStatus.hunger = state.monsterStatus.hunger - payload < 0 ? 0 : state.monsterStatus.hunger-payload;
     }
 
 }

@@ -24,9 +24,9 @@
 <div class="control-menu">
     <div class="error-control" v-if="error">{{error}}</div>
     <h3>Energy left: {{energy}}</h3>
-    <base-button mode="flytrap">Alimentar</base-button>
+    <base-button mode="flytrap" @click="gameStageEat">Alimentar</base-button>
     <!-- <base-button>Entrenar</base-button> -->
-    <base-button mode="flytrap" @click="gameStage">Jugar</base-button>
+    <base-button mode="flytrap" @click="gameStagePlay">Jugar</base-button>
     <base-button mode="flytrap">Explorar</base-button>
     <base-button mode="flytrap" @click="dormirStage">Dormir</base-button>
 </div>
@@ -71,22 +71,36 @@ export default {
         setMonsterStage(){
             this.monsterStage = this.whatMonsterStage;
         },
-        gameStage(){
+        gameStagePlay(){
             this.error = null;
             if(!this.energy > 0){
                 this.error = 'Sleep is healthy. You should try that sometime.'
                 return;
             }
             this.$store.dispatch('lowerEnergy');
-            this.$store.dispatch('minigameStage');
+            this.$store.dispatch('minigameStagePlay');
 
         },
+
+        gameStageEat(){
+            this.error = null;
+            if(!this.energy > 0){
+                this.error = 'Sleep is healthy. You should try that sometime.'
+                return;
+            }
+            this.$store.dispatch('lowerEnergy');
+            this.$store.dispatch('minigameStageEat');
+        },
+
+
         dormirStage(){
             this.error = null;
+            this.$store.dispatch('hungryMonster', 10*Math.floor(Math.random()*2)+1);
             this.$store.dispatch('continueDays');
             this.$store.dispatch('restartEnergy');
             this.energy = this.whatEnergy;
             this.gameDays = this.whatDays;
+            this.hunger = this.whatHunger;
         }
     },
     computed: {

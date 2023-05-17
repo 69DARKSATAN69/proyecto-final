@@ -113,7 +113,7 @@ export default {
 
             } else {
                 document.querySelector('.error-handling').style.display = 'block';
-                document.querySelector('.error-handling').innerHTML = 'Ahí no, campeón';
+                document.querySelector('.error-handling').innerHTML = 'Not there, chief.';
             }
         },
         manejarClic(evento) {
@@ -222,19 +222,19 @@ export default {
             switch (ganador) {
                 case 'jugador':
                     winDif.classList.add('player-win');
-                    winDif.innerHTML = 'A WINNER IS YOU';
+                    winDif.innerHTML = 'YOU WIN';
                     this.winner = 'player';
                     console.log(this.winner);
                     this.gameDecided();
                     break;
                 case 'skynet':
                     winDif.classList.add('skynet-win');
-                    winDif.innerHTML = 'HUMANITY IS DOOMED';
+                    winDif.innerHTML = 'YOU FAIL';
                     this.winner = 'companion';
                     this.gameDecided();
                     break;
                 default:
-                    winDif.innerHTML = 'EMPATE';
+                    winDif.innerHTML = 'YOU TIED';
                     this.winner = 'tie';
                     this.gameDecided();
                     break;
@@ -409,29 +409,12 @@ table {
     background-color: darksalmon;
 }
 
-.difficulty-control {
-    display: flex;
-    flex-direction: column;
-    width: 15%;
-    margin-left: 2em;
-}
 
-#difficulties {
-    padding: 1em;
-    font-family: "Lucida Sans Console", monospace;
-    font-size: 0.9em;
-    margin-top: 1em;
-}
 
 
 @media all and (max-width:760px) {
     .contenedor {
         margin: 0 auto;
-        width: 100%;
-    }
-
-    .total-wins {
-        margin: 0;
         width: 100%;
     }
 
@@ -444,8 +427,4 @@ table {
     }
 
 
-    .difficulty-control {
-        width: 100%;
-        margin-left: 0;
-    }
 }</style>

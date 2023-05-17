@@ -8,8 +8,12 @@ advanceStage(context){
     context.commit('setStage', 2);
 },
 
-minigameStage(context){
+minigameStagePlay(context){
     context.commit('setStage', 4);
+},
+
+minigameStageEat(context){
+    context.commit('setStage', 5);
 },
 
 startDays(context){
@@ -36,6 +40,12 @@ stage1PlayTie(context){
 },
 stage1PlayLose(context){
     context.commit('raiseMonsterSpi', 5);
+},
+feedingMonster(context, payload){
+    context.commit('feedMonster', payload);
+},
+hungryMonster(context,payload){
+    context.commit('monsterHungers', payload)
 },
 
 async InitMonsterData(context, payload){

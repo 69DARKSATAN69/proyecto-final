@@ -6,7 +6,8 @@
 <main>
 
     
-    <img src="./../../assets/stage1geon.jpg">
+    <img src="./../../assets/stage1geon.jpg" v-if="monsterStage === 1">
+    <img src="./../../assets/stage2geon.jpg" v-else-if="monsterStage === 2">
  
 <div class="status-control">
 <base-card>
@@ -15,7 +16,7 @@
 <p>Hit Points: {{monsterAttributes.hp}}</p>
 <p>Strength: {{monsterAttributes.str}}</p>
 <p>Spirit: {{monsterAttributes.spi}}</p>
-<p>Hunger: {{hunger}}%</p>
+<p>Hunger: <progress min=0 max=100 :value=hunger></progress> </p>{{hunger}}%
 </base-card>
 </div>
 </main>
@@ -25,9 +26,8 @@
     <div class="error-control" v-if="error">{{error}}</div>
     <h3>Energy left: {{energy}}</h3>
     <base-button mode="flytrap" @click="gameStageEat">Alimentar</base-button>
-    <!-- <base-button>Entrenar</base-button> -->
     <base-button mode="flytrap" @click="gameStagePlay">Jugar</base-button>
-    <base-button mode="flytrap">Explorar</base-button>
+    <base-button mode="flytrap" v-if="monsterStage > 1">Explorar</base-button>
     <base-button mode="flytrap" @click="dormirStage">Dormir</base-button>
 </div>
 </base-card>
@@ -101,6 +101,7 @@ export default {
             this.energy = this.whatEnergy;
             this.gameDays = this.whatDays;
             this.hunger = this.whatHunger;
+            this.gameDays === 3 ? this.$store.dispatch('enterEvo') : null;
         }
     },
     computed: {

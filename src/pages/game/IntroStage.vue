@@ -13,7 +13,9 @@
 <p>The hole in front of you, however, contains something that could certainly be considered fancy.</p>
 <p>If massive eggs, or at least egg-shaped boulders are your thing, anyway.</p>
 </base-card>
-<input type="text" placeholder="Name your companion and press on the image below" v-model.trim="monsterName">
+<div class="input-control">
+<input type="text"  placeholder="Name your companion and press on the image below" v-model.trim="monsterName">
+</div>
 <div class="error-control" v-if="error">
     <p>{{ error }}</p>
 </div>
@@ -54,7 +56,7 @@ async advanceStage(){
         }catch(err){
             this.error = err || "The server thinks you are wearing white socks. But really, it doesn't work right now, try again later";
         }
-     this.$store.dispatch('advanceStage');
+     this.$store.dispatch('hatchEgg');
     }
 },
 handleNameError(){
@@ -75,5 +77,15 @@ figure img{
     width: 100%;
   
     border: 3px solid burlywood;
+}
+
+.input-control{
+    text-align: center;
+    padding: 1em;
+}
+
+input{
+    width: 50%;
+    padding: 1em 0;
 }
 </style>

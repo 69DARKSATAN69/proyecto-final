@@ -34,6 +34,9 @@ export default {
     },
     getEnergy(state){
         return state.energy;
+    },
+    getMonsterType(state){
+        return state.monsterStatus.type;
     }
 
 

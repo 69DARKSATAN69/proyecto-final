@@ -40,6 +40,12 @@ export default {
         console.log(state.energy);
 
     },
+    raiseMonsterStr(state, payload){
+        state.monsterStatus.attributes.str += payload;
+    },
+    raiseMonsterHp(state,payload){
+        state.monsterStatus.attributes.hp += payload;
+    },
     raiseMonsterSpi(state, payload){
         state.monsterStatus.attributes.spi += payload;
     },
@@ -48,6 +54,8 @@ export default {
     },
     monsterHungers(state, payload){
         state.monsterStatus.hunger = state.monsterStatus.hunger - payload < 0 ? 0 : state.monsterStatus.hunger-payload;
+    },
+    setMonsterStage(state, payload){
+        state.monsterStatus.stage = payload;
     }
-
 }

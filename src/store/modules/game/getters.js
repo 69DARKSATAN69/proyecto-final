@@ -7,6 +7,9 @@ export default {
     getMonster(state){
         return state.monsterStatus;
     },
+    getMonsterAttributes(state){
+        return state.monsterStatus.attributes;
+    },
 
     getEnemy(state){
         return state.enemyStatus;
@@ -37,6 +40,9 @@ export default {
     },
     getMonsterType(state){
         return state.monsterStatus.type;
+    },
+    getCurrentHp(state){
+        return state.monsterStatus.currentHp;
     }
 
 

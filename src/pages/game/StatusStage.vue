@@ -13,7 +13,7 @@
 <base-card>
 <h1>{{monsterName}} the stage {{monsterStage}} Geon</h1>
 <h2>Status</h2>
-<p>Hit Points: {{monsterAttributes.hp}}</p>
+<p>Hit Points: <progress min=0 :max=monsterAttributes.hp :value=currentHp></progress>{{currentHp}} out of {{monsterAttributes.hp}}</p>
 <p>Strength: {{monsterAttributes.str}}</p>
 <p>Spirit: {{monsterAttributes.spi}}</p>
 <p>Hunger: <progress min=0 max=100 :value=hunger></progress> </p>{{hunger}}%
@@ -46,6 +46,7 @@ export default {
             hunger: null,
             energy: 0,
             monsterStage: 0,
+            currentHp: 0
           
         };
     },
@@ -61,6 +62,9 @@ export default {
             this.monsterAttributes.str = this.whatAttributes.str;
             this.monsterAttributes.spi = this.whatAttributes.spi;
 
+        },
+        setCurrentHp(){
+            this.currentHp = this.whatCurrentHp;
         },
         setHunger(){
             this.hunger = this.whatHunger;
@@ -98,9 +102,11 @@ export default {
             this.$store.dispatch('hungryMonster', 10*Math.floor(Math.random()*2)+1);
             this.$store.dispatch('continueDays');
             this.$store.dispatch('restartEnergy');
+            this.hunger = this.whatHunger;
+            this.$store.dispatch('changeCurrentHp', (this.hunger/100)*this.monsterAttributes.hp);
+            this.setCurrentHp();
             this.energy = this.whatEnergy;
             this.gameDays = this.whatDays;
-            this.hunger = this.whatHunger;
             this.gameDays === 3 ? this.$store.dispatch('enterEvo') : null;
         }
     },
@@ -125,6 +131,9 @@ export default {
         },
         whatMonsterStage(){
             return this.$store.getters.getMonsterStage;
+        },
+        whatCurrentHp(){
+            return this.$store.getters.getCurrentHp;
         }
     },
     mounted(){
@@ -135,6 +144,7 @@ export default {
         this.whatEnergy === null ? this.$store.dispatch('restartEnergy') : null;
         this.setEnergy();
         this.setMonsterStage();
+        this.setCurrentHp();
         console.log(this.$store.getters.getMonster);
     }
     

@@ -57,5 +57,8 @@ export default {
     },
     setMonsterStage(state, payload){
         state.monsterStatus.stage = payload;
+    },
+    setCurrentHp(state, payload){
+        state.monsterStatus.currentHp = payload;
     }
 }

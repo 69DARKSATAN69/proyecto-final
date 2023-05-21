@@ -58,6 +58,9 @@ feedingMonster(context, payload){
 hungryMonster(context,payload){
     context.commit('monsterHungers', payload)
 },
+changeCurrentHp(context, payload){
+    context.commit('setCurrentHp', payload);
+},
 
 async InitMonsterData(context, payload){
     const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/${payload.stage}.json`);

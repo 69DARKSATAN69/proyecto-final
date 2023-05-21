@@ -44,6 +44,7 @@ export default {
 methods: {
 async setupMonster(){
    await this.$store.dispatch('InitMonsterData', {stage: 'stage1', type:'Geon', name: this.monsterName});
+   
 },
 
 async advanceStage(){

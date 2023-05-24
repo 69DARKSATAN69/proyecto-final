@@ -16,8 +16,18 @@ minigameStagePlay(context){
     context.commit('setStage', 4);
 },
 
+
 minigameStageEat(context){
     context.commit('setStage', 5);
+},
+minigameStage2Eat(context){
+    context.commit('setStage', 6);
+},
+minigameStage3Eat(context){
+    context.commit('setStage', 7);
+},
+enterCombat(context){
+    context.commit('setStage', 9);
 },
 
 enterEvo(context){
@@ -51,6 +61,9 @@ stage1PlayTie(context){
 },
 stage1PlayLose(context){
     context.commit('raiseMonsterSpi', 5);
+},
+stage1FeedHp(context, payload){
+    context.commit('raiseMonsterHp', payload);
 },
 feedingMonster(context, payload){
     context.commit('feedMonster', payload);

@@ -1,10 +1,15 @@
 <template>
-<intro-stage v-if="whatStage === 1"></intro-stage>
-<hatch-stage v-if="whatStage === 'hatch'"></hatch-stage>
-<status-stage v-if="whatStage === 2"></status-stage>
-<tic-tac-toe v-if="whatStage === 4"></tic-tac-toe>
-<whacka-mole v-if="whatStage === 5"></whacka-mole>
-<evo-stage v-if="whatStage === 'evo'"></evo-stage>
+    <transition name="stageChange" mode="out-in">
+        <intro-stage v-if="whatStage === 1" key="intro"></intro-stage>
+        <hatch-stage v-else-if="whatStage === 'hatch'" key="hatch"></hatch-stage>
+        <status-stage v-else-if="whatStage === 2" key="status"></status-stage>
+        <tic-tac-toe v-else-if="whatStage === 4" key="tic-tac-toe"></tic-tac-toe>
+        <whacka-mole v-else-if="whatStage === 5" key="whacka-mole"></whacka-mole>
+        <whacka-mole2 v-else-if="whatStage === 6" key="whacka-mole2"></whacka-mole2>
+        <evo-stage v-else-if="whatStage === 'evo'" key="evo"></evo-stage>
+        <combat-stage v-else-if="whatStage === 9" key="combat"></combat-stage>
+</transition>
+
 </template>
 
 <script>
@@ -14,14 +19,18 @@ import StatusStage from './StatusStage.vue';
 import TicTacToe from './TicTacToe.vue';
 import WhackaMole from './WhackaMole.vue';
 import EvoStage from './EvoStage.vue';
+import WhackaMole2 from './WhackaMole2.vue';
+import CombatStage from './CombatStage.vue';
 export default {
     components: {
         IntroStage,
         StatusStage,
         TicTacToe,
         WhackaMole,
+        WhackaMole2,
         HatchStage,
-        EvoStage
+        EvoStage,
+        CombatStage
     },
     data(){
     return {
@@ -49,3 +58,27 @@ export default {
 }
 
 </script>
+
+<style scoped>
+.stageChange-enter-active {
+    transition: all 0.3s ease-in-out;
+  }
+  .stageChange-leave-active {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .stageChange-enter-from{
+    opacity: 0;
+    translate: -55em;
+  }
+  .stageChange-leave-to {
+    opacity: 0;
+    translate: 55em;
+  }
+  
+  .stageChange-enter-to,
+  .stageChange-leave-from {
+    opacity: 1;
+    translate: 0;
+  }
+</style>

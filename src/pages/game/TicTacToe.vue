@@ -224,7 +224,6 @@ export default {
                     winDif.classList.add('player-win');
                     winDif.innerHTML = 'YOU WIN';
                     this.winner = 'player';
-                    console.log(this.winner);
                     this.gameDecided();
                     break;
                 case 'skynet':

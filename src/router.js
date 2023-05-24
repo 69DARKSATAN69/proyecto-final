@@ -13,7 +13,6 @@ import UserList from './pages/admin/UserList.vue';
 import ContactForm from './pages/contact/ContactForm.vue';
 import ListComments from './pages/contact/ListComments.vue';
 import TheGame from './pages/game/TheGame.vue';
-
 import store from './store/index.js';
 
 

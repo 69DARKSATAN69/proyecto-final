@@ -80,13 +80,17 @@ methods: {
 
     handleClick(event){
         this.correctClick++;
-        event.target.classList.remove(`InUse${this.randomClass}`);
+        event.target.classList.add('goodClick', 'goodClick-small');
+        setTimeout(() => {
+    event.target.classList.remove('goodClick', 'goodClick-small', `InUse${this.randomClass}`);
+  }, 200);
+        // event.target.classList.remove(`InUse${this.randomClass}`);
         event.target.removeEventListener('click', this.handleClick);
-        console.log(this.correctClick);
     },
 
     exit() {
             //AÑADIR MAS AQUI CUANDO HAYA MAS STAGES
+            this.$store.dispatch('stage1FeedHp', this.correctClick);
            this.$store.dispatch('feedingMonster', this.correctClick*2);
            this.$store.dispatch('advanceStage');
 
@@ -149,6 +153,14 @@ methods: {
     background-image: url('./../../assets/whack/window7.png');
     background-repeat: no-repeat;
     background-size: cover;
+}
+.goodClick{
+    transform: scale(1);
+    transition: transform 0.2s ease;
+}
+
+.goodClick-small{
+    transform: scale(0);
 }
 .error-handling {
     border: 1px solid crimson;

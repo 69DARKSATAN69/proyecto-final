@@ -115,7 +115,9 @@ export default {
         },
 
         combatTest(){
-            this.$store.dispatch('enterCombat');
+            console.log(this.whatStage);
+            this.$store.dispatch('enterExplore');
+            console.log(this.whatStage);
         }
     },
     computed: {

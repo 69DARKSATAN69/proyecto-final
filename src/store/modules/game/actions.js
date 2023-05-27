@@ -16,7 +16,6 @@ minigameStagePlay(context){
     context.commit('setStage', 4);
 },
 
-
 minigameStageEat(context){
     context.commit('setStage', 5);
 },
@@ -26,8 +25,11 @@ minigameStage2Eat(context){
 minigameStage3Eat(context){
     context.commit('setStage', 7);
 },
-enterCombat(context){
+enterExplore(context){
     context.commit('setStage', 9);
+},
+enterCombat(context){
+    context.commit('setStage', 10);
 },
 
 enterEvo(context){
@@ -74,6 +76,11 @@ hungryMonster(context,payload){
 changeCurrentHp(context, payload){
     context.commit('setCurrentHp', payload);
 },
+combatEnd(context, payload){
+    context.commit('raiseMonsterStr', payload);
+    
+},
+
 
 async InitMonsterData(context, payload){
     const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/${payload.stage}.json`);

@@ -3,11 +3,12 @@
         <intro-stage v-if="whatStage === 1" key="intro"></intro-stage>
         <hatch-stage v-else-if="whatStage === 'hatch'" key="hatch"></hatch-stage>
         <status-stage v-else-if="whatStage === 2" key="status"></status-stage>
-        <tic-tac-toe v-else-if="whatStage === 4" key="tic-tac-toe"></tic-tac-toe>
-        <whacka-mole v-else-if="whatStage === 5" key="whacka-mole"></whacka-mole>
-        <whacka-mole2 v-else-if="whatStage === 6" key="whacka-mole2"></whacka-mole2>
+        <tic-tac-toe v-else-if="whatStage === 4" key="ticTacToe"></tic-tac-toe>
+        <whacka-mole v-else-if="whatStage === 5" key="whackaMole"></whacka-mole>
+        <whacka-mole2 v-else-if="whatStage === 6" key="whackaMole2"></whacka-mole2>
         <evo-stage v-else-if="whatStage === 'evo'" key="evo"></evo-stage>
-        <combat-stage v-else-if="whatStage === 9" key="combat"></combat-stage>
+        <explore-stage v-else-if="whatStage === 9" key="explore"></explore-stage>
+        <combat-stage v-else-if="whatStage === 10" key="combatStage"></combat-stage>
 </transition>
 
 </template>
@@ -20,7 +21,9 @@ import TicTacToe from './TicTacToe.vue';
 import WhackaMole from './WhackaMole.vue';
 import EvoStage from './EvoStage.vue';
 import WhackaMole2 from './WhackaMole2.vue';
+import ExploreStage from './ExploreStage.vue';
 import CombatStage from './CombatStage.vue';
+
 export default {
     components: {
         IntroStage,
@@ -30,6 +33,7 @@ export default {
         WhackaMole2,
         HatchStage,
         EvoStage,
+        ExploreStage,
         CombatStage
     },
     data(){

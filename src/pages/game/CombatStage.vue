@@ -1,4 +1,5 @@
 <template>
+    <transition name="combatChange" mode="out-in">
     <section v-if="!whoWon">
         <header>
             <h1>Fight it out!</h1>
@@ -15,7 +16,13 @@
         <div class="enemy-control">
             <figure>
                 <figcaption>{{ enemyName }}</figcaption>
-                <img src="./../../assets/stage1geon.jpg">
+                <img src="./../../assets/forestenemy1.png" v-if="enemyId === 1">
+                <img src="./../../assets/forestenemy2.png" v-else-if="enemyId === 2">
+                <img src="./../../assets/lakeenemy1.png" v-else-if="enemyId === 3">
+                <img src="./../../assets/lakeenemy2.png" v-else-if="enemyId === 4">
+                <img src="./../../assets/mountainenemy1.png" v-else-if="enemyId === 5">
+                <img src="./../../assets/mountainenemy2.png" v-else-if="enemyId === 6">
+                <img src="./../../assets/stage1geon.jpg" v-else>
             </figure>
             <progress class="progress" id="enemy-progress" min=0 :max=enemyAttributes.hp :value=enemyCurrentHP></progress>
         </div>
@@ -27,12 +34,13 @@
     </section>
     <base-card v-else-if="whoWon === 'Monster'">
         <h1>YOU ARE WINNAR</h1>
-        <base-button mode="wallflower" @click="exit()">Leave</base-button>
+        <base-button mode="wallflower" @click="exit">Leave</base-button>
     </base-card>
     <base-card v-else-if="whoWon === 'Enemy'">
         <h1>You and your friends are dead. Game over.</h1>
-        <base-button mode="wallflower" @click="exit()">Leave</base-button>
+        <base-button mode="wallflower" @click="exit">Leave</base-button>
     </base-card>
+</transition>
 </template>
 
 <script>
@@ -48,6 +56,7 @@ export default {
             monsterAttributes: { hp: 100, str: 1, spi: 1 },
             enemyName: 'Mokujin',
             enemyAttributes: { hp: 200, str: 30, spi: 100 },
+            enemyId: null,
             monsterName: '',
             error: null,
             whoWon: ''
@@ -68,7 +77,17 @@ export default {
         },
         whatCurrentHp() {
             return this.$store.getters.getCurrentHp;
+        },
+        whatEnemyName(){
+            return this.$store.getters.getEnemy.name;
+        },
+        whatEnemyAttributes(){
+            return this.$store.getters.getEnemy.attributes;
+        },
+        whatEnemyId(){
+            return this.$store.getters.getEnemy.id;
         }
+        
     },
 
     methods: {
@@ -119,6 +138,12 @@ export default {
         setName() {
             this.monsterName = this.whatName;
         },
+        setEnemyName(){
+            this.enemyName = this.whatEnemyName;
+        },
+        setEnemyAttributes(){
+            this.enemyAttributes = this.whatEnemyAttributes;
+        },
         setAttributesInit() {
             this.monsterAttributes.hp = this.whatAttributes.hp;
             this.monsterAttributes.str = this.whatAttributes.str;
@@ -131,17 +156,15 @@ export default {
         setMonsterStage() {
             this.monsterStage = this.whatMonsterStage;
         },
-
-        log() {
-
-            console.log(this.monsterAttributes);
-
+        setEnemyId(){
+            this.enemyId = this.whatEnemyId;
         },
 
         exit() {
             this.$store.dispatch('changeCurrentHp', this.monsterCurrentHP);
-            console.log(this.gameStage);
-            console.log(this.$store.getters.gameStage);
+            this.$store.dispatch('resetEnemy');
+    
+
 
             if (this.whoWon === 'Monster') {
                 this.$store.dispatch('combatEnd', 20);
@@ -182,6 +205,9 @@ export default {
         this.setCurrentHp();
         this.setMonsterStage();
         this.setGameStage();
+        this.setEnemyName();
+        this.setEnemyAttributes();
+        this.setEnemyId();
     }
 }
 </script>
@@ -234,4 +260,27 @@ figure {
 figure img {
     width: 100%;
 }
+
+
+.combatChange-enter-active {
+    transition: all 0.3s ease-in-out;
+  }
+  .combatChange-leave-active {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .combatChange-enter-from{
+    opacity: 0;
+    transform: translateY(-55em);
+  }
+  .combatChange-leave-to {
+    opacity: 0;
+    transform: translateY(-55em);
+  }
+  
+  .combatChange-enter-to,
+  .combatChange-leave-from {
+    opacity: 1;
+    transform: translateY(0);
+  }
 </style>

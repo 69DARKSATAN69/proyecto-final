@@ -78,11 +78,14 @@ changeCurrentHp(context, payload){
 },
 combatEnd(context, payload){
     context.commit('raiseMonsterStr', payload);
-    
+},
+resetEnemy(context){
+    context.commit('setEnemy', {name: null, attributes: {hp: null, spi: null, str: null}});
 },
 
 
 async InitMonsterData(context, payload){
+    
     const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/${payload.stage}.json`);
     const data2 = await response2.json();
     context.commit('setMonster', {type: payload.type, name: payload.name, hunger: 100, attributes: {hp: data2.attributes.hp, str: data2.attributes.str, spi: data2.attributes.spi}, stage: 1});
@@ -97,6 +100,14 @@ async evolutionStatUpdate(context, payload){
     context.commit('raiseMonsterHp', data2.attributes.hp);
     context.commit('raiseMonsterStr', data2.attributes.str);
     context.commit('raiseMonsterSpi', data2.attributes.spi);
+},
+
+async initEnemyData(context, payload){
+    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/Zones/${payload.zone}/Enemies/${payload.enemy}.json`);
+    const data2 = await response2.json();
+    context.commit('setEnemy', data2)
+    console.log('Los datos tras json son:', data2);
+
 }
 
 }

@@ -1,7 +1,7 @@
 <template>
     <main class="contenedor">
         <div class="error-handling"></div>
-        <div class="tictactoe-control">
+        <base-card class="tictactoe-control">
             <table>
                 <tr id="row1">
                     <td id="cell1" class="cell"></td>
@@ -33,7 +33,7 @@
                     <button class="boton-inicio">Exit</button>
                 </div>
             </div>
-        </div>
+        </base-card>
     </main>
 </template>
 
@@ -407,6 +407,8 @@ table {
     height: 30px;
     background-color: darksalmon;
 }
+
+
 
 
 

@@ -27,7 +27,7 @@
     <h3>Energy left: {{energy}}</h3>
     <base-button mode="flytrap" @click="gameStageEat">Alimentar</base-button>
     <base-button mode="flytrap" @click="gameStagePlay">Jugar</base-button>
-    <base-button mode="flytrap" v-if="monsterStage > 1" @click="combatTest">Explorar</base-button>
+    <base-button mode="flytrap" v-if="monsterStage > 1" @click="exploreStage">Explorar</base-button>
     <base-button mode="flytrap" @click="dormirStage">Dormir</base-button>
 </div>
 </base-card>
@@ -114,7 +114,13 @@ export default {
             this.gameDays === 3 ? this.$store.dispatch('enterEvo') : null;
         },
 
-        combatTest(){
+        exploreStage(){
+            this.error = null;
+            if(!this.energy > 0){
+                this.error = 'Sleep is healthy. You should try that sometime.'
+                return;
+            }
+            this.$store.dispatch('lowerEnergy');
             console.log(this.whatStage);
             this.$store.dispatch('enterExplore');
             console.log(this.whatStage);

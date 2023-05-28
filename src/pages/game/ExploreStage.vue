@@ -5,9 +5,9 @@
         </header>
         <base-card>
 
-            <base-button mode="wallflower" @click="chooseLocation('forest')">Forest</base-button>
-            <base-button mode="wallflower" @click="chooseLocation('lake')">Lake</base-button>
-            <base-button mode="wallflower" @click="chooseLocation('mountain')">Mountains</base-button>
+            <base-button mode="wallflower" @click="chooseLocation('Forest')">Forest</base-button>
+            <base-button mode="wallflower" @click="chooseLocation('Lake')">Lake</base-button>
+            <base-button mode="wallflower" @click="chooseLocation('Mountain')">Mountains</base-button>
 
         </base-card>
     </section>
@@ -30,7 +30,9 @@ export default {
     },
     methods: {
         chooseLocation(place) {
-            this.exploreLocation = place;
+           
+            let randomEnemy = Math.floor(Math.random()*2)+1;
+            this.$store.dispatch('initEnemyData', {zone: place, enemy: randomEnemy} );
             this.$store.dispatch('enterCombat');
 
         },

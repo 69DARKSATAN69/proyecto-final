@@ -8,6 +8,8 @@
     
     <img src="./../../assets/stage1geon.jpg" v-if="monsterStage === 1">
     <img src="./../../assets/stage2geon.jpg" v-else-if="monsterStage === 2">
+    <img src="./../../assets/stage3geon.png" v-else-if="monsterStage === 3">
+    <img src="./../../assets/stage4geon.jpg" v-else-if="monsterStage === 4">
  
 <div class="status-control">
 <base-card>
@@ -95,7 +97,7 @@ export default {
             this.$store.dispatch('lowerEnergy');
             if(this.monsterStage === 1){
             this.$store.dispatch('minigameStageEat');
-            }else if(this.monsterStage === 2){
+            }else{
                 this.$store.dispatch('minigameStage2Eat');
             }
         },
@@ -112,6 +114,7 @@ export default {
             this.energy = this.whatEnergy;
             this.gameDays = this.whatDays;
             this.gameDays === 3 ? this.$store.dispatch('enterEvo') : null;
+            this.gameDays === 6 ? this.$store.dispatch('enterEvo') : null;
         },
 
         exploreStage(){

@@ -8,21 +8,21 @@
         </header>
         <div class="image-control">
            
-            <figure v-if="monsterStage === 1">
+            <figure v-if="monsterStage === 1 && !selecting">
         <transition name="evolution" mode="out-in">
             <img src="./../../assets/stage1geon.jpg" alt="your friend" class="image1 clickImage" v-if="showFirst" @click="changeShow">
             <img src="./../../assets/stage2geon.jpg" alt="your friend, but bigger" class="image2" v-else @animationend="clickMonster" >
         </transition>
             
         </figure>
-        <figure v-else-if="monsterStage === 2 && monsterSpi >= monsterStr">
+        <figure v-else-if="monsterStage === 2 && monsterSpi >= monsterStr && !selecting">
             <transition name="evolution2" mode="out-in">
                 <img src="./../../assets/stage2geon.jpg" alt="your friend" class="image1 clickImage" v-if="showFirst" @click="changeShow">
                 <img src="./../../assets/stage3geon.png" alt="your friend, but bigger" class="image2" v-else @animationend="clickMonster" >
             </transition>
                 
             </figure>
-            <figure v-else>
+            <figure v-else-if="monsterStage === 2 && monsterSpi < monsterStr && !selecting">
                 <transition name="evolution3" mode="out-in">
                   <div class="image-container" v-if="showFirst" @click="changeShow">
                     <div ref="blackLeft" class="black-div"></div>
@@ -32,6 +32,9 @@
                   <img src="./../../assets/stage4geon.jpg" alt="your friend, but bigger" class="image2" v-else @animationend="clickMonster">
                 </transition>
               </figure>
+            <base-card v-else>
+            <header><h1>Choose a trait!</h1></header>
+        <ul><li v-for="(trait, index) in randomTraits" :key="index"><base-button mode="flytrap" @click="setCurrentTrait(trait)">{{trait[0]}}</base-button></li></ul></base-card>
               
   </div>
     </article>
@@ -47,7 +50,11 @@ export default {
             hasGrown: false,
             monsterStage: 1,
             monsterStr: 0,
-            monsterSpi: 0
+            monsterSpi: 0,
+            traits: [],
+            selectedTrait: '',
+            selecting: false
+     
         
         };
     },
@@ -63,9 +70,31 @@ export default {
         },
         whatMonsterAttr(){
             return this.$store.getters.getMonsterAttributes;
-        }
+        },
+        whatCurrentTraits(){
+            return this.$store.getters.getCurrentTraits;
+        },
+        whatTraits(){
+            return this.$store.getters.getTraits;
+        },
+        randomTraits() {
+    const traits = [...Object.entries(this.traits)];
+    const randomSelection = [];
+    console.log(traits);
 
-    },
+
+    for (let i = 0; i < 3; i++) {
+      const randomIndex = Math.floor(Math.random() * traits.length);
+      const randomTrait = traits.splice(randomIndex, 1)[0]; // Remove the selected trait from the array
+      randomSelection.push(randomTrait);
+    }
+
+    return randomSelection;
+  },
+},
+        
+
+    
     methods: {
 
         setName(){
@@ -73,6 +102,19 @@ export default {
         },
         setSpecies(){
             this.monsterSpecies = this.whatType;
+        },
+        setTraits(){
+            this.$store.dispatch('setTraits', this.traits);
+        },
+        setCurrentTrait(trait){
+            this.selectedTrait = trait;
+            console.log(trait);
+            this.$store.dispatch('addTrait', this.selectedTrait);
+           delete this.traits[trait];
+            this.$store.dispatch('setTraits', this.traits);
+                 
+                 this.exitEvo();
+            
         },
         changeShow(e){
             if(this.$refs.blackLeft){
@@ -114,8 +156,12 @@ export default {
             e.target.classList.add('clickImage');
         },
         exitEvo(monsterStage){
+            if(!this.selecting){
             this.$store.dispatch('handleEvolution', monsterStage);
+            this.selecting = !this.selecting;
+            }else{
             this.$store.dispatch('advanceStage');
+            }
         }
     },
     mounted(){
@@ -124,7 +170,9 @@ export default {
         this.monsterStage = this.whatMonsterStage;
         this.monsterStr = this.whatMonsterAttr.str;
         this.monsterSpi = this.whatMonsterAttr.spi;
+        this.traits = this.whatTraits;
         console.log('the monster spi is:', this.monsterSpi);
+        console.log('the monster traits are:', this.traits);
     }
 }
 

@@ -13,6 +13,8 @@ export default {
             inventory: null,
             currentZone: null,
             energy: null,
+            traits: null,
+            currentTraits: []
           
          
 

@@ -82,7 +82,12 @@ combatEnd(context, payload){
 resetEnemy(context){
     context.commit('setEnemy', {name: null, attributes: {hp: null, spi: null, str: null}});
 },
-
+setTraits(context,payload){
+    context.commit('setTraits', payload);
+},
+addTrait(context, payload){
+    context.commit('addCurrentTrait', payload);
+},
 
 async InitMonsterData(context, payload){
     
@@ -108,6 +113,13 @@ async initEnemyData(context, payload){
     context.commit('setEnemy', data2)
     console.log('Los datos tras json son:', data2);
 
+},
+
+async initTraits(context){
+    const response2 = await fetch('https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/traits.json');
+    const data2 = await response2.json();
+    context.commit('setTraits', data2);
+    console.log(data2);
 }
 
 }

@@ -6,6 +6,7 @@
         <tic-tac-toe v-else-if="whatStage === 4" key="ticTacToe"></tic-tac-toe>
         <whacka-mole v-else-if="whatStage === 5" key="whackaMole"></whacka-mole>
         <whacka-mole2 v-else-if="whatStage === 6" key="whackaMole2"></whacka-mole2>
+        <whacka-mole3 v-else-if="whatStage === 7" key="whackaMole3"></whacka-mole3>
         <evo-stage v-else-if="whatStage === 'evo'" key="evo"></evo-stage>
         <explore-stage v-else-if="whatStage === 9" key="explore"></explore-stage>
         <combat-stage v-else-if="whatStage === 10" key="combatStage"></combat-stage>
@@ -23,6 +24,7 @@ import EvoStage from './EvoStage.vue';
 import WhackaMole2 from './WhackaMole2.vue';
 import ExploreStage from './ExploreStage.vue';
 import CombatStage from './CombatStage.vue';
+import WhackaMole3 from './WhackaMole3.vue';
 
 export default {
     components: {
@@ -31,6 +33,7 @@ export default {
         TicTacToe,
         WhackaMole,
         WhackaMole2,
+        WhackaMole3,
         HatchStage,
         EvoStage,
         ExploreStage,
@@ -44,6 +47,7 @@ export default {
         monsterHp: 0,
         monsterSpi: 0,
         monsterStage: 0,
+        traits: {}
     };
 },
 
@@ -54,9 +58,14 @@ export default {
         whatDays(){
             return this.$store.getters.getDays;
         },
+        whatTraits(){
+          return this.$store.getters.getTraits;
+        }
     },
     mounted() {
         this.$store.dispatch('startGame');
+        this.$store.dispatch('initTraits');
+        this.traits = this.whatTraits;
     }
 
 }

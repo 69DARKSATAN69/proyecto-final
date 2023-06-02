@@ -20,6 +20,12 @@
 <p>Spirit: {{monsterAttributes.spi}}</p>
 <p>Hunger: <progress min=0 max=100 :value=hunger></progress> </p>{{hunger}}%
 </base-card>
+<base-card>
+<h1>Traits</h1>
+<ul>
+    <li v-for="(trait, index) of currentTraits" :key="index">{{trait[0]}}: {{trait[1]}}</li>
+</ul>
+</base-card>
 </div>
 </main>
 <nav>
@@ -48,7 +54,8 @@ export default {
             hunger: null,
             energy: 0,
             monsterStage: 0,
-            currentHp: 0
+            currentHp: 0,
+            currentTraits: [],
           
         };
     },
@@ -97,8 +104,10 @@ export default {
             this.$store.dispatch('lowerEnergy');
             if(this.monsterStage === 1){
             this.$store.dispatch('minigameStageEat');
-            }else{
+            }else if(this.monsterStage === 2){
                 this.$store.dispatch('minigameStage2Eat');
+            }else{
+                this.$store.dispatch('minigameStage3Eat');
             }
         },
 
@@ -153,6 +162,9 @@ export default {
         },
         whatCurrentHp(){
             return this.$store.getters.getCurrentHp;
+        },
+        whatCurrentTraits(){
+            return this.$store.getters.getCurrentTraits;
         }
     },
     mounted(){
@@ -164,7 +176,8 @@ export default {
         this.setEnergy();
         this.setMonsterStage();
         this.setCurrentHp();
-        console.log(this.$store.getters.getMonster);
+        this.currentTraits = this.whatCurrentTraits;
+        console.log(this.currentTraits);
     }
     
 

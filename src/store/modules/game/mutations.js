@@ -60,5 +60,11 @@ export default {
     },
     setCurrentHp(state, payload){
         state.monsterStatus.currentHp = payload;
+    },
+    setTraits(state, payload){
+        state.traits = payload;
+    },
+    addCurrentTrait(state, payload){
+        state.currentTraits.push(payload);
     }
 }

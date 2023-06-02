@@ -43,6 +43,12 @@ export default {
     },
     getCurrentHp(state){
         return state.monsterStatus.currentHp;
+    },
+    getTraits(state){
+        return state.traits;
+    },
+    getCurrentTraits(state){
+        return state.currentTraits;
     }
 
 

@@ -48,7 +48,11 @@ continueDays(context){
 },
 
 restartEnergy(context){
+    if(context.state.currentTraits.some(([traitName]) => traitName === 'Dynamo')){
+        context.commit('setEnergy', 4)}else{
     context.commit('setEnergy', 3)
+        }
+        console.log('the current traits array is like: ', context.state.currentTraits);
 },
 
 lowerEnergy(context){
@@ -56,13 +60,25 @@ lowerEnergy(context){
 },
 
 stage1PlayWin(context){
-    context.commit('raiseMonsterSpi', 20);
+    if(context.state.currentTraits.some(([traitName]) => traitName === 'Great Spirit')){
+    context.commit('raiseMonsterSpi', 30);}
+    else{
+        context.commit('raiseMonsterSpi', 20);
+    }
 },
 stage1PlayTie(context){
-    context.commit('raiseMonsterSpi', 10);
+    if(context.state.currentTraits.some(([traitName]) => traitName === 'Great Spirit')){
+        context.commit('raiseMonsterSpi', 15);}
+        else{
+            context.commit('raiseMonsterSpi', 10);
+        }
 },
 stage1PlayLose(context){
-    context.commit('raiseMonsterSpi', 5);
+    if(context.state.currentTraits.some(([traitName]) => traitName === 'Great Spirit')){
+        context.commit('raiseMonsterSpi', 10);}
+        else{
+            context.commit('raiseMonsterSpi', 5);
+        }
 },
 stage1FeedHp(context, payload){
     context.commit('raiseMonsterHp', payload);
@@ -74,7 +90,10 @@ hungryMonster(context,payload){
     context.commit('monsterHungers', payload)
 },
 changeCurrentHp(context, payload){
-    context.commit('setCurrentHp', payload);
+    
+    let healTotal = payload > context.state.monsterStatus.attributes.hp ? context.state.monsterStatus.attributes.hp : payload;
+
+    context.commit('setCurrentHp', healTotal);
 },
 combatEnd(context, payload){
     context.commit('raiseMonsterStr', payload);

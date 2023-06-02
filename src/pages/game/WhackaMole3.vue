@@ -120,15 +120,21 @@
         event.target.removeEventListener('click', this.handleClick);
     },
     
-        exit() {
-                this.$store.dispatch('stage1FeedHp', this.correctClick);
-               this.$store.dispatch('feedingMonster', this.correctClick*2);
-               this.$store.dispatch('advanceStage');
-    
-            }
-    
-    
+    exit() {
+            if(this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Gourmet')){
+                this.$store.dispatch('stage1FeedHp', this.correctClick*2);
+                this.$store.dispatch('feedingMonster', this.correctClick*3);
+                }else{
+            this.$store.dispatch('stage1FeedHp', this.correctClick);
+           this.$store.dispatch('feedingMonster', this.correctClick*2);
+                }
+           this.$store.dispatch('advanceStage');
+
+        }
     },
+    
+    
+    
     
     
         mounted() {

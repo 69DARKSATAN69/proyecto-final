@@ -114,11 +114,23 @@ export default {
 
         dormirStage(){
             this.error = null;
-            this.$store.dispatch('hungryMonster', 10*Math.floor(Math.random()*2)+1);
+            if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Trance')) {
+
+            this.$store.dispatch('hungryMonster', 5*Math.floor(Math.random()*2)+1);
+            }else{
+                this.$store.dispatch('hungryMonster', 10*Math.floor(Math.random()*2)+1);
+
+            }
             this.$store.dispatch('continueDays');
             this.$store.dispatch('restartEnergy');
             this.hunger = this.whatHunger;
-            this.$store.dispatch('changeCurrentHp', (this.hunger/100)*this.monsterAttributes.hp);
+            if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Trance')) {
+
+            this.$store.dispatch('changeCurrentHp', (this.hunger/80)*this.monsterAttributes.hp);
+            }else{
+                this.$store.dispatch('changeCurrentHp', (this.hunger/100)*this.monsterAttributes.hp);
+
+            }
             this.setCurrentHp();
             this.energy = this.whatEnergy;
             this.gameDays = this.whatDays;

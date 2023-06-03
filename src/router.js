@@ -35,7 +35,6 @@ const router = createRouter({
         {path: '/about', component: AboutUs},
         {path: '/playthroughs', component: NotFound},
         {path: '/users', component: UserList, meta: {mustBeAdmin: true}},
-     
         {path: '/:notFound(.*)', component: NotFound}
     ],
 });

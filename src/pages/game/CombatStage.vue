@@ -20,12 +20,15 @@
             <div class="enemy-control">
                 <figure ref="enemyAvatar">
                     <figcaption>{{ enemyName }}</figcaption>
-                    <img class="enemy-control" src="./../../assets/forestenemy1.png" v-if="enemyId === 1">
-                    <img class="enemy-control" src="./../../assets/forestenemy2.png" v-else-if="enemyId === 2">
-                    <img class="enemy-control" src="./../../assets/lakeenemy1.png" v-else-if="enemyId === 3">
-                    <img class="enemy-control" src="./../../assets/lakeenemy2.png" v-else-if="enemyId === 4">
-                    <img class="enemy-control" src="./../../assets/mountainenemy1.png" v-else-if="enemyId === 5">
-                    <img class="enemy-control" src="./../../assets/mountainenemy2.png" v-else-if="enemyId === 6">
+                    <img class="enemy-control" src="./../../assets/forestenemy1.png" v-if="enemyId === 1 && !this.$store.getters.getLastCity">
+                    <img class="enemy-control" src="./../../assets/forestenemy2.png" v-else-if="enemyId === 2 && !this.$store.getters.getLastCity">
+                    <img class="enemy-control" src="./../../assets/lakeenemy1.png" v-else-if="enemyId === 3 && !this.$store.getters.getLastCity">
+                    <img class="enemy-control" src="./../../assets/lakeenemy2.png" v-else-if="enemyId === 4 && !this.$store.getters.getLastCity">
+                    <img class="enemy-control" src="./../../assets/mountainenemy1.png" v-else-if="enemyId === 5 && !this.$store.getters.getLastCity">
+                    <img class="enemy-control" src="./../../assets/mountainenemy2.png" v-else-if="enemyId === 6 && !this.$store.getters.getLastCity">
+                    <img class="enemy-control" src="./../../assets/finish/enemigoOviedo.png" v-else-if="this.$store.getters.getLastCity === 'Oviedo'">
+                    <img class="enemy-control" src="./../../assets/finish/enemigoCanberra.png" v-else-if="this.$store.getters.getLastCity === 'Canberra'">
+                    <img class="enemy-control" src="./../../assets/finish/enemigoUlaanbaatar.png" v-else-if="this.$store.getters.getLastCity === 'Ulaanbaatar'">
                     <img class="enemy-control" src="./../../assets/stage1geon.jpg" v-else>
                 </figure>
                 <progress class="progress" id="enemy-progress" min=0 :max=enemyAttributes.hp
@@ -183,6 +186,7 @@ export default {
         },
 
         calculateSpAttack(fighterAttributes, monsterStage) {
+            console.log('enemy hp before attack', this.enemyAttributes)
             if (!monsterStage || monsterStage === 2 || monsterStage === 4) {
                 const min = 1;
                 const max = 15;
@@ -202,6 +206,8 @@ export default {
 
                 }
             }
+            console.log('enemy hp after attack', this.enemyAttributes);
+
         },
 
         specialAttack() {
@@ -252,11 +258,12 @@ export default {
         },
 
         exit() {
+       
+
+
+        if(!this.$store.getters.getLastCity){
             this.$store.dispatch('changeCurrentHp', this.monsterCurrentHP);
             this.$store.dispatch('resetEnemy');
-
-
-
             if (this.whoWon === 'Monster') {
                 if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Herculean')) {
                     this.$store.dispatch('combatEnd', 30);
@@ -277,7 +284,16 @@ export default {
 
 
             }
+
             this.$store.dispatch('advanceStage');
+        }else{
+            if (this.whoWon === 'Monster') {
+                this.$store.dispatch('setFinishStage', 'Win');
+
+            }else{
+                this.$store.dispatch('setFinishStage', 'Loss');
+            }
+        }
         }
 
 

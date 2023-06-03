@@ -31,6 +31,9 @@ enterExplore(context){
 enterCombat(context){
     context.commit('setStage', 10);
 },
+enterEnd(context){
+    context.commit('setStage', 11);
+},
 
 enterEvo(context){
     context.commit('setStage', 'evo');
@@ -106,6 +109,13 @@ setTraits(context,payload){
 },
 addTrait(context, payload){
     context.commit('addCurrentTrait', payload);
+},
+
+setFinishStage(context, payload){
+    context.commit('setFinishStage', payload)
+},
+setLastCity(context, payload){
+    context.commit('setLastCity', payload);
 },
 
 async InitMonsterData(context, payload){

@@ -66,5 +66,11 @@ export default {
     },
     addCurrentTrait(state, payload){
         state.currentTraits.push(payload);
+    },
+    setFinishStage(state, payload){
+        state.finishStage = payload;
+    },
+    setLastCity(state, payload){
+        state.lastCity = payload;
     }
 }

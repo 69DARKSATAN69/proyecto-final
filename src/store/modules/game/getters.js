@@ -49,6 +49,12 @@ export default {
     },
     getCurrentTraits(state){
         return state.currentTraits;
+    },
+    getFinishStage(state){
+        return state.finishStage;
+    },
+    getLastCity(state){
+        return state.lastCity;
     }
 
 

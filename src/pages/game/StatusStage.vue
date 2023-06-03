@@ -15,7 +15,7 @@
 <base-card>
 <h1>{{monsterName}} the stage {{monsterStage}} Geon</h1>
 <h2>Status</h2>
-<p>Hit Points: <progress min=0 :max=monsterAttributes.hp :value=currentHp></progress>{{currentHp}} out of {{monsterAttributes.hp}}</p>
+<p>Hit Points: <progress min=0 :max=monsterAttributes.hp :value=currentHp></progress>{{parseInt(currentHp)}} out of {{monsterAttributes.hp}}</p>
 <p>Strength: {{monsterAttributes.str}}</p>
 <p>Spirit: {{monsterAttributes.spi}}</p>
 <p>Hunger: <progress min=0 max=100 :value=hunger></progress> </p>{{hunger}}%
@@ -136,6 +136,7 @@ export default {
             this.gameDays = this.whatDays;
             this.gameDays === 3 ? this.$store.dispatch('enterEvo') : null;
             this.gameDays === 6 ? this.$store.dispatch('enterEvo') : null;
+            this.gameDays === 9 ? this.$store.dispatch('enterEnd') : null;
         },
 
         exploreStage(){

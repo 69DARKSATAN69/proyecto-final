@@ -14,7 +14,9 @@ export default {
             currentZone: null,
             energy: null,
             traits: null,
-            currentTraits: []
+            currentTraits: [],
+            finishStage: null,
+            lastCity: null
           
          
 

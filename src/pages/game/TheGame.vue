@@ -10,6 +10,8 @@
         <evo-stage v-else-if="whatStage === 'evo'" key="evo"></evo-stage>
         <explore-stage v-else-if="whatStage === 9" key="explore"></explore-stage>
         <combat-stage v-else-if="whatStage === 10" key="combatStage"></combat-stage>
+        <last-stage v-else-if="whatStage === 11" key="lastStage"></last-stage>
+
 </transition>
 
 </template>
@@ -25,6 +27,7 @@ import WhackaMole2 from './WhackaMole2.vue';
 import ExploreStage from './ExploreStage.vue';
 import CombatStage from './CombatStage.vue';
 import WhackaMole3 from './WhackaMole3.vue';
+import LastStage from './LastStage.vue';
 
 export default {
     components: {
@@ -37,7 +40,8 @@ export default {
         HatchStage,
         EvoStage,
         ExploreStage,
-        CombatStage
+        CombatStage,
+        LastStage
     },
     data(){
     return {

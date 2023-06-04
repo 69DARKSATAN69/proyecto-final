@@ -117,13 +117,34 @@ setFinishStage(context, payload){
 setLastCity(context, payload){
     context.commit('setLastCity', payload);
 },
+endGame(context){
+    context.commit('endGame');
+},
+setPeopleEaten(context, payload){
+    context.commit('setPeopleEaten', payload);
 
+},
+setCombatsWon(context, payload){
+    context.commit('setCombatsWon', payload);
+},
+setCombatsDone(context, payload){
+    context.commit('setCombatsDone', payload);
+},
+setGamesPlayed(context, payload){
+    context.commit('setGamesPlayed', payload);
+},
+setGamesWon(context, payload){
+    context.commit('setGamesWon', payload);
+},
+setGamesTied(context, payload){
+    context.commit('setGamesTied', payload);
+},
 async InitMonsterData(context, payload){
     
     const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/${payload.stage}.json`);
     const data2 = await response2.json();
     context.commit('setMonster', {type: payload.type, name: payload.name, hunger: 100, attributes: {hp: data2.attributes.hp, str: data2.attributes.str, spi: data2.attributes.spi}, stage: 1});
-    // monsterStatus: {type: null,  name: null, hunger: null, attributes: {hp: null, str: null, spi: null}},
+
 
 },
 
@@ -149,6 +170,16 @@ async initTraits(context){
     const data2 = await response2.json();
     context.commit('setTraits', data2);
     console.log(data2);
-}
+},
 
+async sendGame(_, payload){
+    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/playthroughs/${payload.gameId}.json`,
+    {
+        method: 'PUT',
+        body: JSON.stringify(payload.gameScore)
+});
+    const data2 = await response2.json();
+    console.log(data2);
+
+}
 }

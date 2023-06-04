@@ -5,6 +5,7 @@ import mutations from './mutations.js';
 export default {
 state(){
     return {
+        username: null,
         userEmail: null,
         userId: null,
         token: null,

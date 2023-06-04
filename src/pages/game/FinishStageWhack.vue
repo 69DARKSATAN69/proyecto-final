@@ -138,38 +138,54 @@
             switch(this.$store.getters.getLastCity){
                 case 'Oviedo':
                     if(this.correctClick > 7){
+                        this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
+            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
                     }else{
                         this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp/2);
+                        this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
+                        console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
 
                     }
                     break;
                 case 'Cranberra':
                           if(this.correctClick > 9){
+                            this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
+            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                             this.$store.dispatch('setFinishStage', 4)
 
                     }else{
                         this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp/2);
+                        this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
+            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
 
                     }
                     break;
                 case 'Ulaanbaatar':
                 if(this.correctClick > 11){
+                    this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
+            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                     this.$store.dispatch('setFinishStage', 4)
                     }else{
                         this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp/2);
+                        this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
+            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
 
                     }
                     break;
                 default:
                     if(this.correctClick > 7){
+                        this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
+            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
 
                     }else{
                         this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp/2);
+                        this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
+            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
 
                     }

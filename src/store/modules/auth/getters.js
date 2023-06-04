@@ -17,5 +17,8 @@ export default {
     },
     canNavigate(state){
         return state.canNavigate;
+    },
+    getUsername(state){
+        return state.username;
     }
 };

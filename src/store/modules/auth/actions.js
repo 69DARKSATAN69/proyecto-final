@@ -13,7 +13,6 @@ export default {
        
         const responseData = await response.json();
         if(!response.ok){
-            console.log(responseData);
             const error = new Error(responseData.message || 'The server dislikes you. Get out. (but seriously, the request was performed incorrectly)');
             throw error;
 
@@ -22,21 +21,22 @@ export default {
         //Esta parte comprueba si el usuario esta capado o no.
         const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users.json`);
         const data2 = await response2.json();
-        console.log(data2);
         Object.values(data2).forEach(e => {
             if(payload.email === e.email){
                 context.commit('setNavigation', {
                     canNavigate: e.canNavigate
                 });
+                context.commit('setUsername', e.username);
+
             }
         });
         if(!response2.ok){
-            console.log(responseData);
             const error = new Error(responseData.message || 'The server dislikes you. Get out. (but seriously, the request was performed incorrectly)');
             throw error;
 
         }
         context.commit('setUser', {
+           
             email: responseData.email,
             token: responseData.idToken,
             userId: responseData.localId,
@@ -46,7 +46,6 @@ export default {
 
     },
   async signup(context, payload){
-    console.log(payload);
     //Esta parte guarda los datos en el modulo de auth de firebase. Probablemente tendre que borrarlo.
    const userData = {
         username: payload.username,
@@ -66,12 +65,10 @@ export default {
 
         const responseData = await response.json();
         if(!response.ok){
-            console.log(responseData);
             const error = new Error(responseData.error.message || 'The server dislikes you. Get out. (but seriously, the request was performed incorrectly)');
             throw error;
       
         }
-        console.log(userData);
         //A partir de aqui guarda los usuarios en la base de datos. Probablemente tendre que mantener esto.
         const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users/${userData.userNumber}.json`, {
             method: 'PUT',
@@ -79,12 +76,12 @@ export default {
         });
         const response2Data = await response2.json();
         if(!response2.ok){
-            console.log(response2Data);
             const error = new Error(response2Data.error.message || "Saving the user's data in the database did not work as expected");
             throw error;
         }
         //Esta parte guarda los datos en la store de vuex
         context.commit('setUser', {
+            
             email: responseData.email,
             token: responseData.idToken,
             userId: responseData.localId,
@@ -93,6 +90,7 @@ export default {
     },
     logout(context){
         context.commit('setUser', {
+        username: null,
         email: null,
         token: null,
         userId: null,
@@ -111,7 +109,6 @@ export default {
         });
         const responseData = await response.json();
         if(!response.ok){
-            console.log(responseData);
             const error = new Error(responseData.error.message || 'The server dislikes you. Get out. (but seriously, the request was performed incorrectly)');
             throw error;
       
@@ -125,7 +122,6 @@ async grabNavigation(_, payload) {
       const response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users/${payload.userNumber}.json`);
       const data = await response.json();
       if(!response.ok){
-        console.log(data);
         const error = new Error(data.error.message || 'The server dislikes you. Get out. (but seriously, the request was performed incorrectly)');
         throw error;
   

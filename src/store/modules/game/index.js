@@ -10,13 +10,19 @@ export default {
             gameStage: null,
             monsterStatus: {type: null,  name: null, hunger: null, attributes: {hp: null, str: null, spi: null}, stage: null, currentHp: null},
             enemyStatus: {name: null, attributes: {hp: null, spi: null, str: null}, id: null},
-            inventory: null,
             currentZone: null,
             energy: null,
             traits: null,
             currentTraits: [],
             finishStage: null,
-            lastCity: null
+            lastCity: null,
+            peopleEaten: null,
+            combatsWon: null,
+            combatsDone: null,
+            gamesPlayed: null,
+            gamesWon: null,
+            gamesTied: null,
+
           
          
 

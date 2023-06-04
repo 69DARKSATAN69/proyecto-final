@@ -14,8 +14,8 @@
 But it hardly matters. Life comes at you fast, you roll with the punches, live love laugh et cetera et cetera. Good job out there.
 It's not like any of us wouldn't destroy an entire city given the chance.
 Now you can retire, relax and see where things take you and {{ monsterName }}.    </base-card>
-    <base-button >Finish</base-button>
-    <base-button >Finish and upload data</base-button>
+    <base-button mode="wallflower" @click="endNoSave">Finish</base-button>
+    <base-button mode="flytrap" @click="endSave">Finish and upload data</base-button>
         </main>
         
     </article>
@@ -27,6 +27,8 @@ Now you can retire, relax and see where things take you and {{ monsterName }}.  
         return {
         monsterName: null,
         cityName: null,
+        gameId: null,
+        gameScore: null
         };
     },
     computed: {
@@ -39,11 +41,43 @@ Now you can retire, relax and see where things take you and {{ monsterName }}.  
     
     },
     methods: {
+        endNoSave(){
+        this.$store.dispatch('endGame');
+        this.$router.replace('/');
+    },
+    endSave(){
+        this.$store.dispatch('sendGame', {gameId: this.gameId, gameScore: this.gameScore});
+        this.generateId();
+        this.endNoSave();
+    },
+    generateId(){
+       
+       this.gameId = null;
+       this.gameId = this.$uuid.v4();
+   
 
+       },
+       generateGameScore(){
+        let finishedGame = {
+            username: this.$store.getters.getUsername,
+            monster: this.$store.getters.getMonster,
+            peopleEaten: this.$store.getters.getPeopleEaten,
+            lastCity: this.$store.getters.getLastCity,
+            combatsDone: this.$store.getters.getCombatsDone,
+            combatsWon: this.$store.getters.getCombatsWon,
+            gamesPlayed: this.$store.getters.getGamesPlayed,
+            gamesWon: this.$store.getters.getGamesWon,
+            gamesTied: this.$store.getters.getGamesTied
+
+        }
+        this.gameScore = finishedGame;
+       }
     },
     mounted(){
         this.monsterName = this.whatMonsterName;
         this.cityName = this.whatCityName;
+        this.generateId();
+        this.generateGameScore();
     }
         
     

@@ -253,7 +253,7 @@ export default {
         },
 
         exit() {
-            //AÑADIR MAS AQUI CUANDO HAYA MAS STAGES
+            this.$store.dispatch('setGamesPlayed', this.$store.getters.getGamesPlayed+1);
             switch (this.difficulty) {
                 case 1:
                 default:
@@ -261,10 +261,14 @@ export default {
                     switch (this.winner) {
                         case 'player':
                             this.$store.dispatch('stage1PlayWin');
+                            this.$store.dispatch('setGamesWon', this.$store.getters.getGamesWon+1);
+
                             this.$store.dispatch('advanceStage');
                             break;
                         case 'tie':
                             this.$store.dispatch('stage1PlayTie');
+                            this.$store.dispatch('setGamesTied', this.$store.getters.getGamesTied+1);
+
                             this.$store.dispatch('advanceStage');
                             break;
                         case 'companion':

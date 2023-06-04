@@ -20,7 +20,7 @@ But said instincts have never been {{monsterName}}'s priority. It lurches up fro
 </base-card>
 <base-card>Where in the world does the portal take you?
 <base-button mode='flytrap' @click="chooseCity('Oviedo')">Oviedo</base-button>
-<base-button mode='flytrap' @click="chooseCity('Oviedo')">Canberra</base-button>
+<base-button mode='flytrap' @click="chooseCity('Canberra')">Canberra</base-button>
 <base-button mode='flytrap' @click="chooseCity('Ulaanbaatar')">Ulaanbaatar</base-button>
 </base-card>
     </main>

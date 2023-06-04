@@ -15,10 +15,6 @@ export default {
         return state.enemyStatus;
     },
 
-    getInv(state){
-        return state.inventory;
-    },
-
     getZone(state){
         return state.currentZone;
     },
@@ -55,7 +51,26 @@ export default {
     },
     getLastCity(state){
         return state.lastCity;
+    },
+    getPeopleEaten(state){
+        return state.peopleEaten;
+    },
+    getCombatsWon(state){
+        return state.combatsWon;
+    },
+    getCombatsDone(state){
+        return state.combatsDone;
+    },
+    getGamesPlayed(state){
+        return state.gamesPlayed;
+    },
+    getGamesWon(state){
+        return state.gamesWon;
+    },
+    getGamesTied(state){
+        return state.gamesTied;
     }
+
 
 
 }

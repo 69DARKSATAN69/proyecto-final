@@ -187,10 +187,13 @@ export default {
         },
 
         handleVictory(ganador) {
+            this.$store.dispatch('setGamesPlayed', this.$store.getters.getGamesPlayed+1);
             let winDif = document.querySelector('.win-control');
             winDif.style.display = 'block';
             switch (ganador) {
                 case 'jugador':
+                this.$store.dispatch('setGamesWon', this.$store.getters.getGamesWon+1);
+
                     winDif.classList.add('player-win');
                     winDif.innerHTML = 'Crisis Averted';
                     this.winner = 'player';
@@ -200,14 +203,16 @@ export default {
                 this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp/2);
 
                     winDif.classList.add('skynet-win');
-                    winDif.innerHTML = 'KA-BOOM';
+                    winDif.innerHTML = 'The sudden explosion harms your companion!';
                     this.winner = 'companion';
                     this.gameDecided();
                     break;
                 default:
+                this.$store.dispatch('setGamesTied', this.$store.getters.getGamesTied+1);
+
                 this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp-30);
 
-                    winDif.innerHTML = 'boom';
+                    winDif.innerHTML = 'A small explosion grazes your companion.';
                     this.winner = 'tie';
                     this.gameDecided();
                     break;
@@ -227,6 +232,7 @@ export default {
         },
 
         exit() {
+
             this.$store.dispatch('setFinishStage', 6)
 
         }

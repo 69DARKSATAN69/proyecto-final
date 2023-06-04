@@ -72,5 +72,54 @@ export default {
     },
     setLastCity(state, payload){
         state.lastCity = payload;
+    },
+    initExtraStats(state){
+        state.peopleEaten = 0;
+        state.combatsWon = 0;
+       state.combatsDone = 0;
+       state.gamesPlayed = 0;
+       state.gamesWon = 0;
+       state.gamesTied = 0;
+    },
+    setPeopleEaten(state, payload){
+        state.peopleEaten = payload;
+
+    },
+    setCombatsWon(state, payload){
+        state.combatsWon = payload;
+    },
+    setCombatsDone(state, payload){
+        state.combatsDone = payload;
+    },
+    setGamesPlayed(state, payload){
+        state.gamesPlayed = payload;
+    },
+    setGamesWon(state, payload){
+        state.gamesWon = payload;
+    },
+    setGamesTied(state, payload){
+        state.gamesTied = payload;
+    },
+
+
+    endGame(state){
+        state.gameDays= null;
+        state.gameStage= null;
+        state.monsterStatus= {type: null,  name: null, hunger: null, attributes: {hp: null, str: null, spi: null}, stage: null, currentHp: null};
+        state.enemyStatus= {name: null, attributes: {hp: null, spi: null, str: null}, id: null};
+        state.currentZone= null;
+        state.energy= null;
+        state.traits= null;
+        state.currentTraits= [];
+        state.finishStage= null;
+        state.lastCity= null;
+        state.peopleEaten = null;
+        state.combatsWon = null;
+       state.combatsDone = null;
+       state.gamesPlayed = null;
+       state.gamesWon = null;
+       state.gamesTied = null;
+      
     }
+
 }

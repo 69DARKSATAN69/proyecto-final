@@ -33,6 +33,7 @@
                 </figure>
                 <progress class="progress" id="enemy-progress" min=0 :max=enemyAttributes.hp
                     :value=enemyCurrentHP></progress>
+                    <p>{{this.enemyCurrentHP}} - {{this.enemyAttributes.hp}}</p>
             </div>
             <base-card class="button-control">
                 <base-button mode="flytrap" @click="basicAttack()">Golpear</base-button>
@@ -265,6 +266,10 @@ export default {
             this.$store.dispatch('changeCurrentHp', this.monsterCurrentHP);
             this.$store.dispatch('resetEnemy');
             if (this.whoWon === 'Monster') {
+                this.$store.dispatch('setCombatsWon', this.$store.getters.getCombatsWon+1);
+                this.$store.dispatch('setCombatsDone', this.$store.getters.getCombatsDone+1);
+
+
                 if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Herculean')) {
                     this.$store.dispatch('combatEnd', 30);
                 } else {
@@ -274,6 +279,8 @@ export default {
                 }
 
             } else {
+                this.$store.dispatch('setCombatsDone', this.$store.getters.getCombatsDone+1);
+
                 if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Herculean')) {
                     this.$store.dispatch('combatEnd', 10);
                 } else {
@@ -284,13 +291,16 @@ export default {
 
 
             }
-
+    
             this.$store.dispatch('advanceStage');
         }else{
             if (this.whoWon === 'Monster') {
+                this.$store.dispatch('setCombatsWon', this.$store.getters.getCombatsWon+1);
+                this.$store.dispatch('setCombatsDone', this.$store.getters.getCombatsDone+1);
                 this.$store.dispatch('setFinishStage', 'Win');
 
             }else{
+                this.$store.dispatch('setCombatsDone', this.$store.getters.getCombatsDone+1);
                 this.$store.dispatch('setFinishStage', 'Loss');
             }
         }
@@ -323,6 +333,7 @@ export default {
         this.setEnemyName();
         this.setEnemyAttributes();
         this.setEnemyId();
+        this.enemyCurrentHP = this.enemyAttributes.hp;
     }
 }
 </script>

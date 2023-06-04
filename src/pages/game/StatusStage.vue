@@ -37,6 +37,7 @@
     <base-button mode="flytrap" @click="gameStagePlay">Jugar</base-button>
     <base-button mode="flytrap" v-if="monsterStage > 1" @click="exploreStage">Explorar</base-button>
     <base-button mode="flytrap" @click="dormirStage">Dormir</base-button>
+    <base-button mode="wallflower" @click="endNoSave">Salir del juego</base-button>
 </div>
 </base-card>
 </nav>
@@ -149,7 +150,11 @@ export default {
             console.log(this.whatStage);
             this.$store.dispatch('enterExplore');
             console.log(this.whatStage);
-        }
+        },
+        endNoSave(){
+        this.$store.dispatch('endGame');
+        this.$router.replace('/');
+    }
     },
     computed: {
         whatStage(){

@@ -8,5 +8,8 @@ export default {
     },
     setNavigation(state, payload){
         state.canNavigate = payload.canNavigate;
+    },
+    setUsername(state, payload){
+        state.username = payload;
     }
 };

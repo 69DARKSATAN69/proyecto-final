@@ -13,6 +13,7 @@ import UserList from './pages/admin/UserList.vue';
 import ContactForm from './pages/contact/ContactForm.vue';
 import ListComments from './pages/contact/ListComments.vue';
 import TheGame from './pages/game/TheGame.vue';
+import ListPlaythroughs from './pages/playthroughs/listPlaythroughs.vue';
 import store from './store/index.js';
 
 
@@ -33,7 +34,7 @@ const router = createRouter({
         {path: '/contact', component: ContactForm, meta: {mustBeLogged: true}},
         {path: '/comments', component: ListComments, meta: {mustBeAdmin: true}},
         {path: '/about', component: AboutUs},
-        {path: '/playthroughs', component: NotFound},
+        {path: '/playthroughs', component: ListPlaythroughs},
         {path: '/users', component: UserList, meta: {mustBeAdmin: true}},
         {path: '/:notFound(.*)', component: NotFound}
     ],

@@ -100,7 +100,6 @@ export default {
             setTimeout(() => {
                 event.target.classList.remove('goodClick', 'goodClick-small', `InUse${this.randomClass}`);
             }, 200);
-            // event.target.classList.remove(`InUse${this.randomClass}`);
             event.target.removeEventListener('click', this.handleClick);
         },
 

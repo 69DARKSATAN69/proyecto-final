@@ -46,12 +46,11 @@ methods: {
         let response;
         const comment = {userEmail: this.userEmail, commentField: this.commentField, dateStamp: this.dateStamp, commentId: this.commentId};
         try{
-        response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments/${comment.commentId}.json`, {
+        response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments/${comment.commentId}.json?auth=${this.$store.getters.token}`, {
             method: 'PUT',
             body: JSON.stringify(comment)
     });
         let responseData = await response.json();
-        console.log(responseData);
 }catch(err){
     this.error = err.message || 'Failure to comply. The database did not seem to enjoy your attempt.';
  

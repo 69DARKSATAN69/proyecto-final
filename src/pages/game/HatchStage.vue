@@ -52,10 +52,9 @@ export default {
         }
     },
     mounted(){
+        this.$store.dispatch('initTraits');
         this.setName();
         this.setSpecies();
-        console.log(this.$store.getters.getMonsterAttributes);
-        console.log(this.$store.getters.getMonsterAttributes.hp);
         this.$store.dispatch('changeCurrentHp', this.$store.getters.getMonsterAttributes.hp);
     }
 }

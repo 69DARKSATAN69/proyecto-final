@@ -26,8 +26,9 @@ export default {
                 context.commit('setNavigation', {
                     canNavigate: e.canNavigate
                 });
+                sessionStorage.setItem('canNavigate', e.canNavigate);
                 context.commit('setUsername', e.username);
-
+                sessionStorage.setItem('username', e.username);
             }
         });
         if(!response2.ok){
@@ -42,11 +43,12 @@ export default {
             userId: responseData.localId,
             tokenExpiration: responseData.expiresIn
         });
-
+        sessionStorage.setItem('token', responseData.idToken);
+        sessionStorage.setItem('email', responseData.email);
+        sessionStorage.setItem('userId', responseData.localId);
 
     },
   async signup(context, payload){
-    //Esta parte guarda los datos en el modulo de auth de firebase. Probablemente tendre que borrarlo.
    const userData = {
         username: payload.username,
         canNavigate: true,
@@ -57,6 +59,8 @@ export default {
 
       
     };
+    sessionStorage.setItem('username', payload.username);
+
      const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD9fbj0YepcSEm7ReuMjFhSX4woOfV9Qlk',
         {
             method: 'POST',
@@ -87,6 +91,9 @@ export default {
             userId: responseData.localId,
             tokenExpiration: responseData.expiresIn
         });
+        sessionStorage.setItem('token', responseData.idToken);
+        sessionStorage.setItem('email', responseData.email);
+        sessionStorage.setItem('userId', responseData.localId);
     },
     logout(context){
         context.commit('setUser', {
@@ -102,7 +109,7 @@ export default {
   
 },
 //Esta funcion es para que los admins puedan capar o no la navegacion del usuario
-    async toggleNavigation(_, payload){
+    async toggleNavigation(context, payload){
         const response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users/${payload.userNumber}.json`, {
             method: 'PUT',
             body: JSON.stringify({canNavigate: payload.canNavigate, email: payload.email, username: payload.username, userNumber: payload.userNumber}),

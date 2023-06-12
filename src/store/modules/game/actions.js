@@ -55,7 +55,6 @@ restartEnergy(context){
         context.commit('setEnergy', 4)}else{
     context.commit('setEnergy', 3)
         }
-        console.log('the current traits array is like: ', context.state.currentTraits);
 },
 
 lowerEnergy(context){
@@ -141,7 +140,7 @@ setGamesTied(context, payload){
 },
 async InitMonsterData(context, payload){
     
-    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/${payload.stage}.json`);
+    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/${payload.stage}.json?auth=${context.getters.token}`);
     const data2 = await response2.json();
     context.commit('setMonster', {type: payload.type, name: payload.name, hunger: 100, attributes: {hp: data2.attributes.hp, str: data2.attributes.str, spi: data2.attributes.spi}, stage: 1});
 
@@ -149,37 +148,33 @@ async InitMonsterData(context, payload){
 },
 
 async evolutionStatUpdate(context, payload){
-    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/${payload}.json`);
+    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/${payload}.json?auth=${context.getters.token}`);
     const data2 = await response2.json();
-    console.log(data2);
     context.commit('raiseMonsterHp', data2.attributes.hp);
     context.commit('raiseMonsterStr', data2.attributes.str);
     context.commit('raiseMonsterSpi', data2.attributes.spi);
 },
 
 async initEnemyData(context, payload){
-    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/Zones/${payload.zone}/Enemies/${payload.enemy}.json`);
+    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/Zones/${payload.zone}/Enemies/${payload.enemy}.json?auth=${context.getters.token}`);
     const data2 = await response2.json();
     context.commit('setEnemy', data2)
-    console.log('Los datos tras json son:', data2);
 
 },
 
 async initTraits(context){
-    const response2 = await fetch('https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/traits.json');
+    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/monsters/Geon/traits.json?auth=${context.getters.token}`);
     const data2 = await response2.json();
     context.commit('setTraits', data2);
-    console.log(data2);
 },
 
-async sendGame(_, payload){
-    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/playthroughs/${payload.gameId}.json`,
+async sendGame(context, payload){
+    const response2 = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/playthroughs/${payload.gameId}.json?auth=${context.getters.token}`,
     {
         method: 'PUT',
         body: JSON.stringify(payload.gameScore)
 });
     const data2 = await response2.json();
-    console.log(data2);
 
 }
 }

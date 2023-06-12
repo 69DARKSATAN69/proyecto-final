@@ -42,8 +42,7 @@ export default {
     },
     mounted() {
         this.setGameStage();
-        console.log(this.gameStage);
-        console.log(this.whatStage);
+   
     }
 
 }

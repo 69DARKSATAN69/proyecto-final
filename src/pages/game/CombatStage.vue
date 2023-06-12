@@ -187,7 +187,6 @@ export default {
         },
 
         calculateSpAttack(fighterAttributes, monsterStage) {
-            console.log('enemy hp before attack', this.enemyAttributes)
             if (!monsterStage || monsterStage === 2 || monsterStage === 4) {
                 const min = 1;
                 const max = 15;
@@ -207,7 +206,6 @@ export default {
 
                 }
             }
-            console.log('enemy hp after attack', this.enemyAttributes);
 
         },
 

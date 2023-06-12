@@ -35,9 +35,7 @@ export default {
         state.energy = payload;
     },
     lowerEnergy(state){
-        console.log(state.energy);
         state.energy = state.energy-1 >= 0 ? state.energy-1 : 0; 
-        console.log(state.energy);
 
     },
     raiseMonsterStr(state, payload){
@@ -64,6 +62,7 @@ export default {
     setTraits(state, payload){
         state.traits = payload;
     },
+
     addCurrentTrait(state, payload){
         state.currentTraits.push(payload);
     },

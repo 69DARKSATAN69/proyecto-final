@@ -68,8 +68,6 @@ export default {
     },
     mounted() {
         this.$store.dispatch('startGame');
-        this.$store.dispatch('initTraits');
-        this.traits = this.whatTraits;
     }
 
 }

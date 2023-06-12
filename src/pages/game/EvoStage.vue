@@ -78,16 +78,22 @@ export default {
             return this.$store.getters.getTraits;
         },
         randomTraits() {
-    const traits = [...Object.entries(this.traits)];
+    let traits = [...Object.entries(this.traits)];
     const randomSelection = [];
-    console.log(traits);
-
 
     for (let i = 0; i < 3; i++) {
-      const randomIndex = Math.floor(Math.random() * traits.length);
-      const randomTrait = traits.splice(randomIndex, 1)[0]; // Remove the selected trait from the array
-      randomSelection.push(randomTrait);
-    }
+  let randomTrait;
+  let randomIndex;
+  
+  do {
+    randomIndex = Math.floor(Math.random() * traits.length);
+    randomTrait = traits[randomIndex];
+  } while (this.whatCurrentTraits.some(trait => trait[0] === randomTrait[0]));
+
+  
+  traits.splice(randomIndex, 1);
+  randomSelection.push(randomTrait);
+}
 
     return randomSelection;
   },
@@ -106,11 +112,13 @@ export default {
         setTraits(){
             this.$store.dispatch('setTraits', this.traits);
         },
+        removeTrait(payload){
+            this.$store.dispatch('removeTrait', payload);
+        },
         setCurrentTrait(trait){
             this.selectedTrait = trait;
             console.log(trait);
             this.$store.dispatch('addTrait', this.selectedTrait);
-           delete this.traits[trait];
             this.$store.dispatch('setTraits', this.traits);
                  
                  this.exitEvo();
@@ -171,8 +179,7 @@ export default {
         this.monsterStr = this.whatMonsterAttr.str;
         this.monsterSpi = this.whatMonsterAttr.spi;
         this.traits = this.whatTraits;
-        console.log('the monster spi is:', this.monsterSpi);
-        console.log('the monster traits are:', this.traits);
+
     }
 }
 

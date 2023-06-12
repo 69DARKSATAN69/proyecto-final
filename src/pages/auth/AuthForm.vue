@@ -52,7 +52,6 @@ export default {
         async submitForm(){
             const uniqueUsername = await fetch('https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users.json');
             const jsonUsername = await uniqueUsername.json();
-            console.log(jsonUsername);
             
             this.formIsValid = true;
             this.error = null;

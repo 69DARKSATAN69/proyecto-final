@@ -20,7 +20,7 @@
 <p>Spirit: {{monsterAttributes.spi}}</p>
 <p>Hunger: <progress min=0 max=100 :value=hunger></progress> </p>{{hunger}}%
 </base-card>
-<base-card>
+<base-card v-if="currentTraits.length > 0" id="traits-control">
 <h1>Traits</h1>
 <ul>
     <li v-for="(trait, index) of currentTraits" :key="index">{{trait[0]}}: {{trait[1]}}</li>
@@ -147,9 +147,7 @@ export default {
                 return;
             }
             this.$store.dispatch('lowerEnergy');
-            console.log(this.whatStage);
             this.$store.dispatch('enterExplore');
-            console.log(this.whatStage);
         },
         endNoSave(){
         this.$store.dispatch('endGame');
@@ -195,7 +193,6 @@ export default {
         this.setMonsterStage();
         this.setCurrentHp();
         this.currentTraits = this.whatCurrentTraits;
-        console.log(this.currentTraits);
     }
     
 

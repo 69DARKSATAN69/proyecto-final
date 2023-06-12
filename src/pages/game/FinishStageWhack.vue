@@ -90,12 +90,10 @@
     randomCell2.classList.remove(`InUse1`);
   });
 
-  // Generate new random numbers and store them in the arrays
   this.randomNo = [];
   this.randomNo2 = [];
   this.randomClass = Math.floor(Math.random() * 7) + 1;
 
-  // Add event listeners and apply classes to new random numbers
   const randomNo = Math.floor(Math.random() * 9) + 1;
   const randomNo2 = Math.floor(Math.random() * (18 - 9 + 1)) + 8;
   this.randomNo.push(randomNo);
@@ -139,12 +137,10 @@
                 case 'Oviedo':
                     if(this.correctClick > 7){
                         this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
-            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
                     }else{
                         this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp/2);
                         this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
-                        console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
 
                     }
@@ -152,13 +148,11 @@
                 case 'Cranberra':
                           if(this.correctClick > 9){
                             this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
-            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                             this.$store.dispatch('setFinishStage', 4)
 
                     }else{
                         this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp/2);
                         this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
-            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
 
                     }
@@ -166,12 +160,10 @@
                 case 'Ulaanbaatar':
                 if(this.correctClick > 11){
                     this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
-            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                     this.$store.dispatch('setFinishStage', 4)
                     }else{
                         this.$store.dispatch('changeCurrentHp', this.$store.getters.getCurrentHp/2);
                         this.$store.dispatch('setPeopleEaten', this.$store.getters.getPeopleEaten+this.correctClick);
-            console.log('so far there have been people eaten of this number: ', this.$store.getters.getPeopleEaten);
                         this.$store.dispatch('setFinishStage', 4)
 
                     }

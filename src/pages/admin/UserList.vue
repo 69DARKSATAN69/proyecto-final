@@ -61,7 +61,7 @@ export default {
         async getUsers() {
             this.error = null;
             try {
-                const response = await fetch('https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users.json');
+                const response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=${this.$store.getters.token}`);
                 const data = await response.json();
                 this.allUsers = data;
             } catch (err) {

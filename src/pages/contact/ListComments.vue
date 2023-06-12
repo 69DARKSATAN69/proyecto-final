@@ -47,7 +47,7 @@ export default {
             this.error = null;
             this.isLoading = true;
             try {
-                const response = await fetch('https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments.json');
+                const response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments.json?auth=${this.$store.getters.token}`);
                 const data = await response.json();
                 this.allComments = data;
             } catch (err) {
@@ -65,7 +65,6 @@ export default {
             try {
                 response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments/${commentId}.json`, { method: 'DELETE' });
                 const data = await response.json();
-                console.log(data);
             } catch (err) {
                 this.error = err.message || 'Failure to comply. The selected comment has probably already been deleted.';
             } finally {

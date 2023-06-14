@@ -63,8 +63,9 @@ export default {
             this.isLoading = true;
             let response;
             try {
-                response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments/${commentId}.json`, { method: 'DELETE' });
+                response = await fetch(`https://irkala-b41eb-default-rtdb.europe-west1.firebasedatabase.app/comments/${commentId}.json?auth=${this.$store.getters.token}`, { method: 'DELETE' });
                 const data = await response.json();
+                console.log(data);
             } catch (err) {
                 this.error = err.message || 'Failure to comply. The selected comment has probably already been deleted.';
             } finally {
@@ -93,8 +94,9 @@ ul {
 }
 
 li {
-    width: 100%;
-    margin: 3em 0;
+    width: 70%;
+    
+    margin: 3em auto;
 }
 
 .button-control {

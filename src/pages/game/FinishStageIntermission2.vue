@@ -6,10 +6,15 @@
            After what some will call a harrowing battle and others (specifically, {{ monsterName }}) will call brunch, the remaining soldiers beat a hasty retreat.
            When you look slightly to the left outside of your peripheral vision, it becomes clear why.
         </base-card>
-        <base-card>During the chaos, the forces of {{cityName}} dropped a comically large bomb next to {{monsterName}}. Thankfully, thanks to your hopefully extensive training,
-    it is capable of disarming it and thus gets to work.</base-card>
-  
-    <base-button @click="progress">Hackerman!</base-button>
+        <figure>
+            <img src="./../../assets/finish/bomb.png" alt="the ira would be proud">
+          </figure>
+        <base-card class="lastp">During the chaos, the forces of {{cityName}} dropped a comically large bomb next to {{monsterName}}. Thankfully, thanks to your hopefully extensive training,
+    it is capable of disarming it and thus gets to work.
+    <base-button class="button" @click="progress" mode="flytrap">Hackerman!</base-button>
+
+</base-card>
+
         </main>
         
     </article>
@@ -46,3 +51,35 @@
     
     }
     </script>
+
+<style scoped>
+article{
+   
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  gap: 3em;
+}
+header{
+    grid-column: span 12;
+    text-align: center;
+}
+main{
+    grid-column: 3/11;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.lastp{
+    grid-column: span 12;
+    text-align: center;
+}
+
+.button{
+    width: 50%;
+    margin: auto;
+    margin-top: 2em;
+}
+</style>

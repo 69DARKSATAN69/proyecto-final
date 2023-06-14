@@ -6,10 +6,14 @@
            With either deft claws or tough skin, {{ monsterName }} has averted yet another crisis thrown its way by the merciless forces of people trying not to die in the most awesome way possible.
 
         </base-card>
-        <base-card>{{cityName}} is not done however. Clearing the rubble around you, their most powerful champion stands tall, 
-        challenging {{monsterName}} to a winner-takes-all fight to the death.</base-card>
+        <figure>
+            <img src="./../../assets/finish/ruins.png">
+            </figure>
+        <base-card class="lastp">{{cityName}} is not done however. Clearing the rubble around you, their most powerful champion stands tall, 
+        challenging {{monsterName}} to a winner-takes-all fight to the death.
+        <base-button @click="progress" mode="flytrap" class="button">It's our last dance!</base-button>
+</base-card>
   
-    <base-button @click="progress">It's our last dance!</base-button>
         </main>
         
     </article>
@@ -47,3 +51,34 @@
     
     }
     </script>
+    <style scoped>
+    article{
+       
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+      gap: 3em;
+    }
+    header{
+        grid-column: span 12;
+        text-align: center;
+    }
+    main{
+        grid-column: 3/11;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .lastp{
+        grid-column: span 12;
+        text-align: center;
+    }
+    
+    .button{
+        width: 50%;
+        margin: auto;
+        margin-top: 2em;
+    }
+    </style>

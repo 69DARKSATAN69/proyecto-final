@@ -1,5 +1,9 @@
 export default {
     async login(context, payload){
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('username');
         //En el caso de cambiar como funciona el register, esto tambien tendra que irse.
         const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD9fbj0YepcSEm7ReuMjFhSX4woOfV9Qlk',
         {
@@ -27,10 +31,12 @@ export default {
                     canNavigate: e.canNavigate
                 });
                 sessionStorage.setItem('canNavigate', e.canNavigate);
-                context.commit('setUsername', e.username);
-                sessionStorage.setItem('username', e.username);
+                context.commit('setUsername', e.username );
+                sessionStorage.setItem('username', e.username );
+                
             }
         });
+        if(!sessionStorage.getItem('username')){sessionStorage.setItem('username', 'admin'); context.commit('setUsername', 'admin');}
         if(!response2.ok){
             const error = new Error(responseData.message || 'The server dislikes you. Get out. (but seriously, the request was performed incorrectly)');
             throw error;
@@ -42,6 +48,7 @@ export default {
             token: responseData.idToken,
             userId: responseData.localId,
             tokenExpiration: responseData.expiresIn
+            
         });
         sessionStorage.setItem('token', responseData.idToken);
         sessionStorage.setItem('email', responseData.email);
@@ -49,6 +56,10 @@ export default {
 
     },
   async signup(context, payload){
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('userId');
+    sessionStorage.removeItem('username');
    const userData = {
         username: payload.username,
         canNavigate: true,
@@ -59,7 +70,6 @@ export default {
 
       
     };
-    sessionStorage.setItem('username', payload.username);
 
      const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD9fbj0YepcSEm7ReuMjFhSX4woOfV9Qlk',
         {
@@ -96,6 +106,10 @@ export default {
         sessionStorage.setItem('userId', responseData.localId);
     },
     logout(context){
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('email');
+        sessionStorage.removeItem('userId');
+        sessionStorage.removeItem('username');
         context.commit('setUser', {
         username: null,
         email: null,

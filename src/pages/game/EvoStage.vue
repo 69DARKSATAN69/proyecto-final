@@ -1,4 +1,5 @@
 <template>
+
     <article>
         <header>
             <base-card>
@@ -7,7 +8,7 @@
         </base-card>
         </header>
         <div class="image-control">
-           
+       <transition name="fade" mode="out-in">
             <figure v-if="monsterStage === 1 && !selecting">
         <transition name="evolution" mode="out-in">
             <img src="./../../assets/stage1geon.jpg" alt="your friend" class="image1 clickImage" v-if="showFirst" @click="changeShow">
@@ -32,12 +33,23 @@
                   <img src="./../../assets/stage4geon.jpg" alt="your friend, but bigger" class="image2" v-else @animationend="clickMonster">
                 </transition>
               </figure>
-            <base-card v-else>
-            <header><h1>Choose a trait!</h1></header>
-        <ul><li v-for="(trait, index) in randomTraits" :key="index"><base-button mode="flytrap" @click="setCurrentTrait(trait)">{{trait[0]}}</base-button></li></ul></base-card>
+           
+            <base-card v-else-if="selecting">
+            <header>
+                <h1>Choose a trait!</h1>
+            </header>
+        <ul>
+            <li v-for="(trait, index) in randomTraits" :key="index">
+                <base-button mode="flytrap" @click="setCurrentTrait(trait)">{{trait[0]}}</base-button>
+        </li>
+    </ul>
+</base-card>
+</transition>
+
               
   </div>
     </article>
+
 </template>
 
 <script>
@@ -348,4 +360,22 @@ cursor: pointer;
         to{filter:brightness(100%); transform: scale3d(1,1,1);}
     }
 
+  
+
+    
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity 0.5s;
+    }
+    
+    .fade-enter-from,
+    .fade-leave-to {
+      opacity: 0;
+    }
+
+    .fade-leave-from,
+    .fade-enter-to{
+        opacity: 1;
+    }
+    
 </style>

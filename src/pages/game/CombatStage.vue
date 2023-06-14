@@ -33,7 +33,7 @@
                 </figure>
                 <progress class="progress" id="enemy-progress" min=0 :max=enemyAttributes.hp
                     :value=enemyCurrentHP></progress>
-                    <p>{{this.enemyCurrentHP}} - {{this.enemyAttributes.hp}}</p>
+              
             </div>
             <base-card class="button-control">
                 <base-button mode="flytrap" @click="basicAttack()">Golpear</base-button>
@@ -42,12 +42,28 @@
             </base-card>
         </section>
         <base-card v-else-if="whoWon === 'Monster'">
-            <h1>YOU ARE WINNAR</h1>
-            <base-button mode="wallflower" @click="exit">Leave</base-button>
+        <article>
+            <header>
+        <h1>Victory</h1>
+    </header>
+    <main class="winner-main"><p>After an arduous battle, {{monsterName}} emerges victorious against the nefarious {{enemyName}}.</p>
+    <p>The strain of the battle causes {{monsterName}}'s muscles to swell!</p></main>
+            <base-button mode="wallflower" @click="exit">Back to your camp</base-button>
+        </article> 
         </base-card>
         <base-card v-else-if="whoWon === 'Enemy'">
-            <h1>You and your friends are dead. Game over.</h1>
+        <article >
+            <header>
+                <h1>Defeat!</h1>
+            </header>
+            <main class="defeat-main">
+                <p>Despite its best efforts, {{monsterName}} was defeated by {{enemyName}}'s overwhelming assault.</p>
+                <p>{{monsterName}} nonetheless caused enough damage to {{enemyName}} to make it wary of giving chase.</p>
+                <p>The sting of defeat and the strain of the battle strengthen {{monsterName}}'s resolve and muscles both.</p>
+            </main>
             <base-button mode="wallflower" @click="exit">Leave</base-button>
+
+        </article>
         </base-card>
     </transition>
 </template>
@@ -385,6 +401,10 @@ figure img {
     width: 100%;
 }
 
+.winner-main, .defeat-main{
+    text-align:center;
+    padding: 1em;
+}
 
 .combatChange-enter-active {
     transition: all 0.3s ease-in-out;

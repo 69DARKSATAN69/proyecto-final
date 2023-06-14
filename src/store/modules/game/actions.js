@@ -175,6 +175,7 @@ async sendGame(context, payload){
         body: JSON.stringify(payload.gameScore)
 });
     const data2 = await response2.json();
+    console.log(data2);
 
 }
 }

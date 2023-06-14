@@ -1,47 +1,61 @@
 <template>
-<div class="container">
-    <header>
-    <h1>DAY {{ gameDays }} OF YOUR JOURNEY IN IRKALA</h1>
-</header>
-<main>
+    <div class="container">
+        <header>
+            <h1 class="days">DAY {{ gameDays }} OF YOUR JOURNEY IN IRKALA</h1>
+        </header>
+        <main>
 
-    
-    <img src="./../../assets/stage1geon.jpg" v-if="monsterStage === 1">
-    <img src="./../../assets/stage2geon.jpg" v-else-if="monsterStage === 2">
-    <img src="./../../assets/stage3geon.png" v-else-if="monsterStage === 3">
-    <img src="./../../assets/stage4geon.jpg" v-else-if="monsterStage === 4">
- 
-<div class="status-control">
-<base-card>
-<h1>{{monsterName}} the stage {{monsterStage}} Geon</h1>
-<h2>Status</h2>
-<p>Hit Points: <progress min=0 :max=monsterAttributes.hp :value=currentHp></progress>{{parseInt(currentHp)}} out of {{monsterAttributes.hp}}</p>
-<p>Strength: {{monsterAttributes.str}}</p>
-<p>Spirit: {{monsterAttributes.spi}}</p>
-<p>Hunger: <progress min=0 max=100 :value=hunger></progress> </p>{{hunger}}%
-</base-card>
-<base-card v-if="currentTraits.length > 0" id="traits-control">
-<h1>Traits</h1>
-<ul>
-    <li v-for="(trait, index) of currentTraits" :key="index">{{trait[0]}}: {{trait[1]}}</li>
-</ul>
-</base-card>
-</div>
-</main>
-<nav>
-<base-card>
-<div class="control-menu">
-    <div class="error-control" v-if="error">{{error}}</div>
-    <h3>Energy left: {{energy}}</h3>
-    <base-button mode="flytrap" @click="gameStageEat">Alimentar</base-button>
-    <base-button mode="flytrap" @click="gameStagePlay">Jugar</base-button>
-    <base-button mode="flytrap" v-if="monsterStage > 1" @click="exploreStage">Explorar</base-button>
-    <base-button mode="flytrap" @click="dormirStage">Dormir</base-button>
-    <base-button mode="wallflower" @click="endNoSave">Salir del juego</base-button>
-</div>
-</base-card>
-</nav>
-</div>
+
+            <img src="./../../assets/stage1geon.jpg" v-if="monsterStage === 1">
+            <img src="./../../assets/stage2geon.jpg" v-else-if="monsterStage === 2">
+            <img src="./../../assets/stage3geon.png" v-else-if="monsterStage === 3">
+            <img src="./../../assets/stage4geon.jpg" v-else-if="monsterStage === 4">
+
+            <div class="status-control">
+                <base-card>
+                    <h1>{{ monsterName }} the stage {{ monsterStage }} Geon</h1>
+                    <h2>Status</h2>
+                    <p>Hit Points: <progress min=0 :max=monsterAttributes.hp
+                            :value=currentHp></progress>{{ parseInt(currentHp) }} out of {{ monsterAttributes.hp }}</p>
+                    <p>Strength: {{ monsterAttributes.str }}</p>
+                    <p>Spirit: {{ monsterAttributes.spi }}</p>
+                    <p>Satiation: <progress min=0 max=100 :value=hunger></progress>      {{ hunger }}% </p>
+                </base-card>
+                <base-card v-if="currentTraits.length > 0" id="traits-control">
+                    <h1>Traits</h1>
+                    <ul>
+                        <li v-for="(trait, index) of currentTraits" :key="index">{{ trait[0] }}: {{ trait[1] }}</li>
+                    </ul>
+                </base-card>
+            </div>
+        </main>
+        <nav>
+            <base-card>
+            <div class="error-control" v-if="error">{{ error }}</div>
+            <h3>Energy left: {{ energy }}</h3>    
+            <div class="control-menu">
+              
+                    <figure class="action-figure">
+                        <figcaption>Feeding</figcaption>
+                        <img src="./../../assets/statusmenu/eat.png" alt="feeding" @click="gameStageEat">
+                        </figure>
+                        <figure class="action-figure">
+                            <figcaption>Playtime</figcaption>
+                            <img src="./../../assets/statusmenu/play.png" alt="feeding" @click="gameStagePlay">
+                            </figure>
+                            <figure v-if="monsterStage > 1" class="action-figure">
+                                <figcaption>Exploring</figcaption>
+                                <img src="./../../assets/statusmenu/explore.png" alt="feeding" @click="exploreStage">
+                                </figure>
+                                <figure class="action-figure">
+                                    <figcaption>Sleeping</figcaption>
+                                    <img src="./../../assets/statusmenu/sleep.png" alt="feeding" @click="dormirStage">
+                                    </figure>
+                </div>
+                <base-button mode="wallflower" @click="endNoSave">Salir del juego</base-button>
+            </base-card>
+        </nav>
+    </div>
 </template>
 
 <script>
@@ -51,43 +65,43 @@ export default {
             monsterName: '',
             error: null,
             gameDays: 0,
-            monsterAttributes: {hp: 0, str: 0, spi: 0},
+            monsterAttributes: { hp: 0, str: 0, spi: 0 },
             hunger: null,
             energy: 0,
             monsterStage: 0,
             currentHp: 0,
             currentTraits: [],
-          
+
         };
     },
     methods: {
-        setDays(){
+        setDays() {
             this.gameDays = this.whatDays;
         },
-        setName(){
+        setName() {
             this.monsterName = this.whatName;
         },
-        setAttributesInit(){
+        setAttributesInit() {
             this.monsterAttributes.hp = this.whatAttributes.hp;
             this.monsterAttributes.str = this.whatAttributes.str;
             this.monsterAttributes.spi = this.whatAttributes.spi;
 
         },
-        setCurrentHp(){
+        setCurrentHp() {
             this.currentHp = this.whatCurrentHp;
         },
-        setHunger(){
+        setHunger() {
             this.hunger = this.whatHunger;
         },
-        setEnergy(){
+        setEnergy() {
             this.energy = this.whatEnergy;
         },
-        setMonsterStage(){
+        setMonsterStage() {
             this.monsterStage = this.whatMonsterStage;
         },
-        gameStagePlay(){
+        gameStagePlay() {
             this.error = null;
-            if(!this.energy > 0){
+            if (!this.energy > 0) {
                 this.error = 'Sleep is healthy. You should try that sometime.'
                 return;
             }
@@ -96,30 +110,30 @@ export default {
 
         },
 
-        gameStageEat(){
+        gameStageEat() {
             this.error = null;
-            if(!this.energy > 0){
+            if (!this.energy > 0) {
                 this.error = 'Sleep is healthy. You should try that sometime.'
                 return;
             }
             this.$store.dispatch('lowerEnergy');
-            if(this.monsterStage === 1){
-            this.$store.dispatch('minigameStageEat');
-            }else if(this.monsterStage === 2){
+            if (this.monsterStage === 1) {
+                this.$store.dispatch('minigameStageEat');
+            } else if (this.monsterStage === 2) {
                 this.$store.dispatch('minigameStage2Eat');
-            }else{
+            } else {
                 this.$store.dispatch('minigameStage3Eat');
             }
         },
 
 
-        dormirStage(){
+        dormirStage() {
             this.error = null;
             if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Trance')) {
 
-            this.$store.dispatch('hungryMonster', 5*Math.floor(Math.random()*2)+1);
-            }else{
-                this.$store.dispatch('hungryMonster', 10*Math.floor(Math.random()*2)+1);
+                this.$store.dispatch('hungryMonster', 5 * Math.floor(Math.random() * 2) + 1);
+            } else {
+                this.$store.dispatch('hungryMonster', 10 * Math.floor(Math.random() * 2) + 1);
 
             }
             this.$store.dispatch('continueDays');
@@ -127,9 +141,9 @@ export default {
             this.hunger = this.whatHunger;
             if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Trance')) {
 
-            this.$store.dispatch('changeCurrentHp', (this.hunger/80)*this.monsterAttributes.hp);
-            }else{
-                this.$store.dispatch('changeCurrentHp', (this.hunger/100)*this.monsterAttributes.hp);
+                this.$store.dispatch('changeCurrentHp', (this.hunger / 80) * this.monsterAttributes.hp);
+            } else {
+                this.$store.dispatch('changeCurrentHp', (this.hunger / 100) * this.monsterAttributes.hp);
 
             }
             this.setCurrentHp();
@@ -140,50 +154,50 @@ export default {
             this.gameDays === 9 ? this.$store.dispatch('enterEnd') : null;
         },
 
-        exploreStage(){
+        exploreStage() {
             this.error = null;
-            if(!this.energy > 0){
+            if (!this.energy > 0) {
                 this.error = 'Sleep is healthy. You should try that sometime.'
                 return;
             }
             this.$store.dispatch('lowerEnergy');
             this.$store.dispatch('enterExplore');
         },
-        endNoSave(){
-        this.$store.dispatch('endGame');
-        this.$router.replace('/');
-    }
+        endNoSave() {
+            this.$store.dispatch('endGame');
+            this.$router.replace('/');
+        }
     },
     computed: {
-        whatStage(){
+        whatStage() {
             return this.$store.getters.gameStage;
         },
-        whatDays(){
+        whatDays() {
             return this.$store.getters.getDays;
         },
-        whatName(){
+        whatName() {
             return this.$store.getters.getName;
         },
-        whatAttributes(){
+        whatAttributes() {
             return this.$store.getters.getMonster.attributes;
         },
-        whatHunger(){
+        whatHunger() {
             return this.$store.getters.getHunger;
         },
-        whatEnergy(){
+        whatEnergy() {
             return this.$store.getters.getEnergy;
         },
-        whatMonsterStage(){
+        whatMonsterStage() {
             return this.$store.getters.getMonsterStage;
         },
-        whatCurrentHp(){
+        whatCurrentHp() {
             return this.$store.getters.getCurrentHp;
         },
-        whatCurrentTraits(){
+        whatCurrentTraits() {
             return this.$store.getters.getCurrentTraits;
         }
     },
-    mounted(){
+    mounted() {
         this.setName();
         this.setDays();
         this.setAttributesInit();
@@ -194,17 +208,62 @@ export default {
         this.setCurrentHp();
         this.currentTraits = this.whatCurrentTraits;
     }
-    
+
 
 
 }
 </script>
 
 <style scoped>
-main{display: grid; grid-template-columns: repeat(12, 1fr); gap: 1em;}
+main {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 1em;
+}
 
-main img{grid-column: span 5; width: 90%; border: 1px solid burlywood; border-radius: 12px;}
-.status-control{grid-column: span 6; width: 100%;}
+main img {
+    grid-column: span 5;
+    width: 90%;
+    border: 1px solid burlywood;
+    border-radius: 12px;
+    margin: 1em;
+}
 
-.error-control{padding: 2em;}
+.status-control {
+    grid-column: span 6;
+    width: 100%;
+}
+
+.control-menu{
+    display: flex;
+    flex-direction: row;
+}
+.error-control {
+    padding: 2em;
+}
+header{
+    text-align: center;
+}
+
+figcaption{
+    text-align: center;
+}
+
+.action-figure img{
+    width: 100%;
+    cursor: pointer;
+}
+
+#traits-control{
+    margin-top: 1em;
+}
+
+#traits-control ul{
+    list-style: none;
+}
+.days{
+    letter-spacing: 0.2em;
+    
+}
+
 </style>

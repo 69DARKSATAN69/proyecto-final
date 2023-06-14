@@ -51,6 +51,7 @@ methods: {
             body: JSON.stringify(comment)
     });
         let responseData = await response.json();
+        console.log(responseData);
 }catch(err){
     this.error = err.message || 'Failure to comply. The database did not seem to enjoy your attempt.';
  

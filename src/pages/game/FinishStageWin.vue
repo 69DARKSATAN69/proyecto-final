@@ -60,7 +60,7 @@ Now you can retire, relax and see where things take you and {{ monsterName }}.  
        generateGameScore(){
         let finishedGame = {
             playthroughId: this.gameId,
-            username: this.$store.getters.getUsername,
+            username: this.$store.getters.getUsername || 'admin',
             monster: this.$store.getters.getMonster,
             peopleEaten: this.$store.getters.getPeopleEaten,
             lastCity: this.$store.getters.getLastCity,

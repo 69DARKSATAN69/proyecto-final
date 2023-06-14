@@ -1,5 +1,6 @@
 <template>
     <transition name="stageChange" mode="out-in">
+      
         <intro-stage v-if="whatStage === 1" key="intro"></intro-stage>
         <hatch-stage v-else-if="whatStage === 'hatch'" key="hatch"></hatch-stage>
         <status-stage v-else-if="whatStage === 2" key="status"></status-stage>
@@ -68,7 +69,12 @@ export default {
     },
     mounted() {
         this.$store.dispatch('startGame');
-    }
+    },
+    unmounted(){
+      this.$store.dispatch('endGame');
+        this.$router.replace('/');
+    },
+ 
 
 }
 

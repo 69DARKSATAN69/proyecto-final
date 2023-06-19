@@ -1,3 +1,4 @@
+<!-- este componente, al igual que las otras intermissions es sólo informativo del 'argumento'. -->
 <template>
 <article>
     <header><base-card><h1>The first challenge</h1></base-card></header>
@@ -21,6 +22,7 @@
 
 </template>
 <script>
+//no hay mucho que decir, recibe el nombre de la ciudad y del monstruo para rellenar bien el texto.
 export default {
 data(){
     return {

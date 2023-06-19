@@ -1,3 +1,5 @@
+<!-- similar al componente de exploración, da información y permite seleccionar dónde se irá a la prueba final. -->
+
 <template>
 <article>
     <header>
@@ -24,9 +26,6 @@ But said instincts have never been {{monsterName}}'s priority. It lurches up fro
 </base-card>
 <base-card class="fourthp">
 <span>Where in the world does the portal take you?</span>
-<!-- <base-button mode='flytrap' @click="chooseCity('Oviedo')">Oviedo</base-button>
-<base-button mode='flytrap' @click="chooseCity('Canberra')">Canberra</base-button>
-<base-button mode='flytrap' @click="chooseCity('Ulaanbaatar')">Ulaanbaatar</base-button> -->
 
 <figure>
     <img src="./../../assets/finish/oviedo.jpg" alt="Uvieu" @click="chooseCity('Oviedo')">
@@ -55,6 +54,7 @@ computed: {
     }
 },
 methods: {
+    //las ciudades por orden de dificultad son: ulaanbaatar > canberra > oviedo.
 chooseCity(city){
     this.$store.dispatch('setLastCity', city);
     this.$store.dispatch('setFinishStage', 2);

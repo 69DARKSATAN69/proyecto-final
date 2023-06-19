@@ -1,3 +1,4 @@
+<!-- //este componente lleva el minijuego de combate. -->
 <template>
     <transition name="combatChange" mode="out-in">
         <section v-if="!whoWon">
@@ -70,7 +71,7 @@
 
 <script>
 export default {
-
+//guarda datos referentes a status y atributos tanto del enemigo como del propio monstruo.
     data() {
         return {
             gameStage: 0,
@@ -89,6 +90,7 @@ export default {
             enemyAvatar: null,
             beam: null,
         };
+        //los datos computados sacan los datos del monstruo de la store de juego y del enemigo de la base de datos.
     },
     computed: {
         whatStage() {
@@ -119,7 +121,7 @@ export default {
     },
 
     methods: {
-
+        //añade una clase para hacer una animación sencilla cuando el combatiente es golpeado.
         giveOnHit(fighter) {
             fighter.classList.add('being-hit');
             setTimeout(() => {
@@ -127,7 +129,8 @@ export default {
             }, 600);
         },
 
-
+        //calcula el ataque basico, del botón 'attack'. Utiliza mayormente fuerza y un poco de espíritu, pero varía
+        //en función del stage del monstruo y de sus traits.
         calculateBasicAttack(fighterAttributes, monsterStage) {
             if (!monsterStage || monsterStage === 2) {
                 const min = -5;
@@ -159,7 +162,8 @@ export default {
                 }
             }
         },
-
+        //función manejadora del ataque básico. añade y quita las animaciones pertinentes y utiliza la función de cálculo del daño
+        //para restar vida al oponente. Acto seguido el oponente contraataca y el monstruo recibe daño.
         basicAttack() {
             this.playerAvatar.classList.add('player-attack');
             setTimeout(() => {
@@ -176,7 +180,7 @@ export default {
             }
 
         },
-
+        //calcula la curación resultante del botón regenerate. Utiliza espíritu.
         calculateHealing(fighterAttributes) {
             const min = -5;
             const max = 15;
@@ -187,7 +191,7 @@ export default {
 
             }
         },
-
+        //manejador de regenerate, añade y quita animación y aumenta vida según el anterior cálculo. El enemigo ataca después.
         regeneration() {
             this.playerAvatar.classList.add('player-regen');
             setTimeout(() => {
@@ -201,7 +205,7 @@ export default {
                 this.monsterCurrentHP = this.monsterCurrentHP - this.calculateBasicAttack(this.enemyAttributes) < 0 ? 0 : this.monsterCurrentHP - this.calculateBasicAttack(this.enemyAttributes);
             }
         },
-
+        //calcula el daño del ataque espiritual, como su nombre indica basado en espíritu.
         calculateSpAttack(fighterAttributes, monsterStage) {
             if (!monsterStage || monsterStage === 2 || monsterStage === 4) {
                 const min = 1;
@@ -224,7 +228,7 @@ export default {
             }
 
         },
-
+        //manejador del ataque espiritual. Similar a los otros manejadores.
         specialAttack() {
             this.playerAvatar.classList.add('player-power-up');
             setTimeout(() => {
@@ -243,6 +247,7 @@ export default {
                 this.monsterCurrentHP = this.monsterCurrentHP - this.calculateBasicAttack(this.enemyAttributes) < 0 ? 0 : this.monsterCurrentHP - this.calculateBasicAttack(this.enemyAttributes);
             }
         },
+        //estos siguientes métodos son para setear bien los datos al montarse este componente.
         setGameStage() {
             this.gameStage = this.whatStage;
         },
@@ -272,10 +277,10 @@ export default {
             this.enemyId = this.whatEnemyId;
         },
 
+        //función manejadora de final de combate. Aumenta fuerza al ganar/perder, más si ganas, aumenta el número de combates
+        //(y victorias si ganas) y devuelve al componente status si estabas explorando o lleva al final del juego si estabas en el último
+        //combate.
         exit() {
-       
-
-
         if(!this.$store.getters.getLastCity){
             this.$store.dispatch('changeCurrentHp', this.monsterCurrentHP);
             this.$store.dispatch('resetEnemy');
@@ -322,6 +327,7 @@ export default {
 
 
     },
+    //estos disparadores dan la victoria al monstruo o al enemigo cuando uno de los combatientes llega a 0 o menos de vida.
     watch: {
         enemyCurrentHP(newValue) {
             if (newValue <= 0) {
@@ -335,6 +341,7 @@ export default {
         }
     },
 
+    //cuando se monta el componente, setea todo lo relevante.
     mounted() {
         this.playerAvatar = this.$refs.youControl;
         this.enemyAvatar = this.$refs.enemyAvatar;

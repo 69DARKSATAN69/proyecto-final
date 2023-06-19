@@ -1,3 +1,5 @@
+<!-- este componente es el whack a mole de la secuencia final. Es similar a los otros, pero más difícil. -->
+
 <template>
     <main class="contenedor">
         <div class="error-handling"></div>
@@ -31,7 +33,7 @@
 
                 </tr>
             </table>
-    <div class="eat-control">{{correctClick}} soldados devorados de </div>
+    <div class="eat-control">{{correctClick}} soldados devorados</div>
             <div class="controls-panel">
                 <div class="button-control">
                     <button class="boton-exit" @click="exit">Exit</button>
@@ -43,6 +45,7 @@
     
     <script>
     export default {
+        //los datos son similares al whack a mole normal, pero con un tablero mayor y espacio para más intervalos.
         data() {
             return {
                 cells: Array(18).fill(null),
@@ -61,7 +64,7 @@
             }
         },
     methods: {
-    
+    //esta vez hay dos intervalos para activar dos celdas al mismo tiempo. 
         reInit() {
       document.querySelector('.boton-exit').disabled = true;
       this.intervalIds = []; // Clear previous interval IDs
@@ -131,7 +134,8 @@
       event.target.removeEventListener('click', this.handleClick);
     },
 
-    
+    //esto continua la secuencia final. Hay un mínimo de enemigos que hay que tocar, si no se llega a ese mínimo el monstruo pierde vida.
+    //el mínimo varía según la ciudad.
     exit() {
             switch(this.$store.getters.getLastCity){
                 case 'Oviedo':

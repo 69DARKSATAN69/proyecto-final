@@ -1,3 +1,5 @@
+<!-- igual que los últimos dos componentes, menor intervalo, mayor tablero. -->
+
 <template>
     <main class="contenedor">
         <div class="error-handling"></div>
@@ -59,7 +61,6 @@ export default {
             randomNo2: null,
             randomClass: null,
             correctClick: 0,
-            difficulty: 1,
         };
     },
     computed: {
@@ -137,7 +138,6 @@ export default {
             this.cell13 = document.querySelector('#cell13'),
             this.cell14 = document.querySelector('#cell14'),
             this.cell15 = document.querySelector('#cell15'),
-            this.difficulty = this.whatMonsterStage;
         this.reInit();
     }
 

@@ -1,5 +1,5 @@
+<!-- //este componente maneja las evoluciones del monstruo -->
 <template>
-
     <article>
         <header>
             <base-card>
@@ -54,6 +54,7 @@
 
 <script>
 export default {
+    //los datos son en su mayoría atributos del monstruo, con algunos booleanos para manejar qué se muestra en este componente.
     data(){
         return {
             monsterName: '',
@@ -70,6 +71,7 @@ export default {
         
         };
     },
+    //los datos computados sacan los atributos del monstruo de la store de juego.
     computed: {
         whatName(){
             return this.$store.getters.getName;
@@ -89,24 +91,20 @@ export default {
         whatTraits(){
             return this.$store.getters.getTraits;
         },
-        randomTraits() {
+    //recoge tres traits al azar para mostrar como opciones después de la evolución. Descarta los ya elegidos anteriormente.  
+    randomTraits() {
     let traits = [...Object.entries(this.traits)];
     const randomSelection = [];
-
     for (let i = 0; i < 3; i++) {
   let randomTrait;
   let randomIndex;
-  
   do {
     randomIndex = Math.floor(Math.random() * traits.length);
     randomTrait = traits[randomIndex];
   } while (this.whatCurrentTraits.some(trait => trait[0] === randomTrait[0]));
-
-  
   traits.splice(randomIndex, 1);
   randomSelection.push(randomTrait);
 }
-
     return randomSelection;
   },
 },
@@ -114,7 +112,7 @@ export default {
 
     
     methods: {
-
+//estos métodos manejan eventos, extracciones de datos de la store del juego y selección de traits.
         setName(){
             this.monsterName = this.whatName;
         },
@@ -145,6 +143,8 @@ export default {
             e.target.removeEventListener('click', this.changeShow);
             
         },
+        //este en concreto hace que al pulsar sobre el monstruo, en función de su stage, evolucione de una manera u otra
+        //y añada atributos extra según la evolución de la bdd.
         clickMonster(e){
             if(this.monsterStage === 1){
             e.target.addEventListener('click', this.exitEvo(2));
@@ -175,6 +175,7 @@ export default {
             this.hasGrown = true;
             e.target.classList.add('clickImage');
         },
+        //este método maneja el salir de esta parte del juego y volver al status.
         exitEvo(monsterStage){
             if(!this.selecting){
             this.$store.dispatch('handleEvolution', monsterStage);
@@ -184,6 +185,7 @@ export default {
             }
         }
     },
+    //al montarse el componente, setea todos los datos relevantes.
     mounted(){
         this.setName();
         this.setSpecies();

@@ -1,3 +1,5 @@
+<!-- componente contenedor de todos los del juego. Se accede a unos u otros según la variable whatStage. -->
+
 <template>
     <transition name="stageChange" mode="out-in">
       
@@ -45,6 +47,7 @@ export default {
         LastStage
     },
     data(){
+      //mantiene una serie de datos del monstruo, pero probablemente sobran.
     return {
         days: 0,
         monsterName: '',

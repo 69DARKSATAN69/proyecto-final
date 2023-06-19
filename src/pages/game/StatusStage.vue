@@ -1,3 +1,5 @@
+<!-- componente base del juego, desde aquí se accede a los demás y los demás traen aquí. -->
+
 <template>
     <div class="container">
         <header>
@@ -60,6 +62,7 @@
 
 <script>
 export default {
+    //las variables son en su mayoría atributos del monstruo.
     data() {
         return {
             monsterName: '',
@@ -74,6 +77,7 @@ export default {
 
         };
     },
+    //todos los setters son para manejar los datos del monstruo/partida en tiempo real.
     methods: {
         setDays() {
             this.gameDays = this.whatDays;
@@ -99,6 +103,7 @@ export default {
         setMonsterStage() {
             this.monsterStage = this.whatMonsterStage;
         },
+        //esto lleva al minijuego de tres en raya, si la energia es 0 o menor, da un mensaje de error.
         gameStagePlay() {
             this.error = null;
             if (!this.energy > 0) {
@@ -111,6 +116,7 @@ export default {
         },
 
         gameStageEat() {
+            //esto lleva al minijuego de alimentación, también depende de la energía.
             this.error = null;
             if (!this.energy > 0) {
                 this.error = 'Sleep is healthy. You should try that sometime.'
@@ -128,6 +134,8 @@ export default {
 
 
         dormirStage() {
+            //regenera la salud del monstruo en función de su hambre, resetea la energía y hace las comprobaciones de si ya toca
+            //evolucionar o entrar en la última fase del juego.
             this.error = null;
             if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Trance')) {
 
@@ -155,6 +163,7 @@ export default {
         },
 
         exploreStage() {
+            //blablabla energía. Lleva al componente de exploración.
             this.error = null;
             if (!this.energy > 0) {
                 this.error = 'Sleep is healthy. You should try that sometime.'
@@ -164,11 +173,13 @@ export default {
             this.$store.dispatch('enterExplore');
         },
         endNoSave() {
+            //permite salir de la partida reseteando todas las variables. Es la forma segura.
             this.$store.dispatch('endGame');
             this.$router.replace('/');
         }
     },
     computed: {
+        //en general utilizados para manejar los datos en tiempo real.
         whatStage() {
             return this.$store.getters.gameStage;
         },
@@ -198,6 +209,7 @@ export default {
         }
     },
     mounted() {
+        //al monstarse este componente, setea todos los datos del juego/monstruo a los de la store.
         this.setName();
         this.setDays();
         this.setAttributesInit();

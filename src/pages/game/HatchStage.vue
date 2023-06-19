@@ -1,3 +1,5 @@
+<!-- este componente sencillamente muestra el huevo eclosionando -->
+
 <template>
     <article>
         <header>
@@ -21,6 +23,7 @@
 <script>
 export default {
     data(){
+        //el boolean showEgg gobierna cuando se muestra el huevo y cuando su eclosión.
         return {
             monsterName: '',
             monsterSpecies: '',
@@ -51,6 +54,7 @@ export default {
             e.target.classList.add('clickImage');
         }
     },
+    //al montarse ya se empiezan a setear los atributos del monstruo.
     mounted(){
         this.$store.dispatch('initTraits');
         this.setName();

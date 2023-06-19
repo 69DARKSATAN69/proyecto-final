@@ -1,3 +1,4 @@
+<!-- este componente es para ganar el juego. Te permite subir la partida a la bdd o sencillamente irte. -->
 <template>
     <article>
         <header><base-card><h1>Winner!</h1></base-card></header>
@@ -57,6 +58,8 @@ Now you can retire, relax and see where things take you and {{ monsterName }}.  
    
 
        },
+       //esto es lo que genera el juego que va a guardar, mayormente de datos de la store.
+       //en caso del jugador siendo un admin, al no tener username, se pone 'admin'.
        generateGameScore(){
         let finishedGame = {
             playthroughId: this.gameId,

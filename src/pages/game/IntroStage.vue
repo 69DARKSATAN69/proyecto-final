@@ -1,3 +1,5 @@
+<!-- esto es el componente de intro al juego, es informativo. -->
+
 <template>
     <div v-if="whatStage === 1">
 <base-card>
@@ -29,6 +31,7 @@
 <script>
 
 export default {
+    //la variable monsterName es para nombrar al monstruo, la de error es para manejo de errores de nombres inválidos.
     data() {
         return {
             monsterName: '',
@@ -42,6 +45,7 @@ export default {
         },
     },
 methods: {
+    //utiliza un método de la store para inicializar al monstruo con sus atributos básicos.
 async setupMonster(){
    await this.$store.dispatch('InitMonsterData', {stage: 'stage1', type:'Geon', name: this.monsterName});
    
@@ -52,6 +56,7 @@ async advanceStage(){
 
      this.handleNameError()}
     else{
+        //el try catch saltaría si el servidor por lo que fuera no respondiera, por faltar auth o que cayese firebase.
         try{
         await this.setupMonster();
         }catch(err){

@@ -1,3 +1,5 @@
+<!-- similar al TheGame, es un componente contenedor que va pasando por las fases del final del juego. -->
+
 <template>
     <LastStageIntro v-if="this.$store.getters.getFinishStage === 1"></LastStageIntro>
     <FinishStageIntermission1 v-else-if="this.$store.getters.getFinishStage === 2"></FinishStageIntermission1>

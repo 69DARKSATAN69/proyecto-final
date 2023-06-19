@@ -1,3 +1,5 @@
+<!-- componente para el minijuego de alimentar, es como el juego de pegar a topos con mazos. -->
+
 <template>
     <main class="contenedor">
         <div class="error-handling"></div>
@@ -33,6 +35,8 @@
 export default {
     data() {
         return {
+            //toma las diferentes celdas, variables para almacenar números aleatorios y cuántos clicks exitosos hiciste.
+            //al ser la dificultad más baja, el tablero es pequeño.
             cell1: null,
             cell2: null,
             cell3: null,
@@ -45,7 +49,6 @@ export default {
             randomNo: null,
             randomClass: null,
             correctClick: 0,
-            difficulty: 1,
         };
     },
     computed: {
@@ -54,7 +57,8 @@ export default {
         }
     },
     methods: {
-
+        //inicia el juego, dejándolo preparado para jugar. Crea un intervalo. Puesto que esto es la dificultad más baja, es un intervalo
+        //relativamente largo. En todos los casos, los intervalos terminan a los 10 segundos.
         reInit() {
             document.querySelector('.boton-exit').disabled = true;
             let intervalId = setInterval(this.handleRandomizer, 800);
@@ -65,6 +69,7 @@ export default {
         },
 
         handleRandomizer() {
+            //maneja la generación de números aleatorios para activar celdas al azar y darles una entre varias clases para indicarlo.
             if (!this.randomNo) {
                 this.randomNo = Math.floor(Math.random() * 9) + 1;
             } else {
@@ -80,6 +85,8 @@ export default {
         },
 
         handleClick(event) {
+            //maneja si hay un click exitoso (sobre una celda con este evento). Hay una pequeña animación para quitar la imagen que 
+            //tenía la celda y se aumenta el contador.
             this.correctClick++;
             event.target.classList.add('goodClick', 'goodClick-small');
             setTimeout(() => {
@@ -89,6 +96,8 @@ export default {
         },
 
         exit() {
+            //maneja salir de aquí y volver al status, aumenta la saciación del monstruo en función de los clicks correctos
+            //y la vida máxima en función de lo mismo.
             if (this.$store.getters.getCurrentTraits.some(([traitName]) => traitName === 'Gourmet')) {
                 this.$store.dispatch('stage1FeedHp', this.correctClick * 2);
                 this.$store.dispatch('feedingMonster', this.correctClick * 3);
@@ -106,6 +115,7 @@ export default {
 
 
     mounted() {
+        //setea las variables de data al montar el componente e inicia la partida.
         this.cell1 = document.querySelector('#cell1'),
             this.cell2 = document.querySelector('#cell2'),
             this.cell3 = document.querySelector('#cell3'),
@@ -115,7 +125,6 @@ export default {
             this.cell7 = document.querySelector('#cell7'),
             this.cell8 = document.querySelector('#cell8'),
             this.cell9 = document.querySelector('#cell9'),
-            this.difficulty = this.whatMonsterStage;
         this.reInit();
     }
 

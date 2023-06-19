@@ -1,3 +1,4 @@
+<!-- ver intermission 1 para comentarios acerca de este tipo de componente. -->
 <template>
     <article>
         <header><base-card><h1>The second challenge</h1></base-card></header>

@@ -1,19 +1,10 @@
+<!-- es un componente sencillo intermediario entre el status y el combate -->
 <template>
     <section v-if="!exploreLocation">
         <header>
             <h2>Which region will you explore?</h2>
         </header>
         <base-card>
-
-            <!-- <base-button mode="wallflower" @click="chooseLocation('Forest')">Forest</base-button>
-            <base-button mode="wallflower" @click="chooseLocation('Lake')">Lake</base-button>
-            <base-button mode="wallflower" @click="chooseLocation('Mountain')">Mountains</base-button> -->
-        <!-- <figure>
-            <img src="./../../assets/explore/forest.jpg" @click="chooseLocation('Forest')">
-        
-            <img src="./../../assets/explore/lake.jpg" @click="chooseLocation('Lake')">
-            <img src="./../../assets/explore/mountain.jpg" @click="chooseLocation('Mountain')">
-        </figure> -->
         <div class="option-control">
             <figure>
                 <figcaption>Forest</figcaption>
@@ -29,16 +20,13 @@
             <img src="./../../assets/explore/mountain.jpg" @click="chooseLocation('Mountain')">
         </figure>
     </div>
-
-      
-
         </base-card>
     </section>
 </template>
 
 <script>
 export default {
-
+//los datos son en qué parte del juego nos encontramos y hacia dónde quiere ir el jugador
     data() {
         return {
             exploreLocation: '',
@@ -51,6 +39,8 @@ export default {
             return this.$store.getters.gameStage;
         },
     },
+    //al seleccionar un lugar, se elige a un monstruo de la base de datos de ese lugar para servir de oponente en el combate
+    //acto seguido se inicia el combate.
     methods: {
         chooseLocation(place) {
            

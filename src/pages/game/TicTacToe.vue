@@ -1,3 +1,5 @@
+<!-- componente de tres en raya, utilizado en la acción 'play' y aumenta el espíritu. -->
+
 <template>
     <main class="contenedor">
         <div class="error-handling"></div>
@@ -40,6 +42,7 @@
 <script>
 export default {
     data() {
+        //guarda datos varios del tablero, qué combinaciones dan victoria, quién ganó y la dificultad del juego, que es 1 por defecto.
         return {
             cell1: null,
             cell2: null,
@@ -67,7 +70,7 @@ export default {
     methods: {
 
         reInit() {
-
+            //resetea el tablero y permite jugar.
 
             document.querySelector('.boton-inicio').addEventListener('click', this.exit);
             document.querySelector('.boton-inicio').disabled = true;
@@ -87,6 +90,7 @@ export default {
         },
 
         pulsaCelda(c) {
+            //manejador del evento de click. Pinta la celda pulsada si se puede pintar y hace moverse a la máquina según la dificultad.
             document.querySelector('.error-handling').style.display = 'none';
             if (!c.classList.contains('porJugador') && !c.classList.contains('porSkynet')) {
                 c.classList.add('porJugador');
@@ -112,15 +116,18 @@ export default {
                 }
 
             } else {
+                //errores en caso de pulsar donde no debes.
                 document.querySelector('.error-handling').style.display = 'block';
                 document.querySelector('.error-handling').innerHTML = 'Not there, chief.';
             }
         },
         manejarClic(evento) {
+            //función intermedia para llamar a la anterior.
             this.pulsaCelda(evento.target)
         },
 
         skynetMueve() {
+            //versión más sencilla de la ia, mueve al primer sitio vacío.
             if (!this.quedanVacias()) {
                 return;
             } else {
@@ -139,6 +146,7 @@ export default {
         },
 
         skynetMueveRandom() {
+            //versión intermedia, mueve a una celda aleatoria.
             let movimientoCorrecto = false;
             if (!this.quedanVacias()) {
                 return;
@@ -160,6 +168,8 @@ export default {
 
 
         skynetMueveAMatar() {
+            //versión avanzada, busca si el jugador está a punto de ganar para interrumpirle, o si ella misma está a punto de ganar
+            //para ganar.
             let movimientoCorrecto = false;
             if (!this.quedanVacias()) {
                 return;
@@ -193,6 +203,7 @@ export default {
 
 
         quedanVacias() {
+            //función comprobadora de empate, que es cuando el tablero está lleno y no hay ganadores.
             for (let i = 0; i < this.board.length; i++) {
                 for (let j = 0; j < this.board[i].length; j++) {
                     if (!this.board[i][j].classList.contains('porJugador') && !this.board[i][j].classList.contains('porSkynet')) {
@@ -205,7 +216,7 @@ export default {
         },
 
         comprobacionVictoria(faction) {
-
+            //comprueba si las condiciones de victoria se cumplen para algún jugador.
             for (let i = 0; i < this.condicionesVictoria.length; i++) {
                 const [cellA, cellB, cellC] = this.condicionesVictoria[i];
                 if (cellA.classList.contains(faction) && cellB.classList.contains(faction) && cellC.classList.contains(faction)) {
@@ -217,6 +228,7 @@ export default {
         },
 
         handleVictory(ganador) {
+            //maneja la lógica en caso de que algún jugador gane, o haya empate.
             let winDif = document.querySelector('.win-control');
             winDif.style.display = 'block';
             switch (ganador) {
@@ -242,6 +254,7 @@ export default {
         },
 
         gameDecided() {
+            //al terminar la partida, quita interactuabilidad al tablero.
             for (let i = 0; i < this.board.length; i++) {
                 for (let j = 0; j < this.board[i].length; j++) {
                     this.board[i][j].removeEventListener('click', this.manejarClic);
@@ -253,6 +266,7 @@ export default {
         },
 
         exit() {
+            //maneja salir de la partida, aumenta el espíritu más o menos según ganes, pierdas o empates.
             this.$store.dispatch('setGamesPlayed', this.$store.getters.getGamesPlayed+1);
             switch (this.difficulty) {
                 case 1:
@@ -295,6 +309,7 @@ export default {
             this.row2 = [this.cell4, this.cell5, this.cell6],
             this.row3 = [this.cell7, this.cell8, this.cell9],
             this.board = [this.row1, this.row2, this.row3],
+            //estos arrays son los que deben tener la misma clase para haber una victoria.
             this.condicionesVictoria = [
                 [this.cell1, this.cell2, this.cell3],
                 [this.cell4, this.cell5, this.cell6],
@@ -305,6 +320,7 @@ export default {
                 [this.cell1, this.cell5, this.cell9],
                 [this.cell3, this.cell5, this.cell7]
             ],
+            //la dificultad es igual al stage del monstruo, 3 y 4 se consideran al mismo nivel.
             this.difficulty = this.whatMonsterStage;
         this.reInit();
     }

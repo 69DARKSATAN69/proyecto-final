@@ -1,3 +1,4 @@
+<!-- es el juego de tic tac toe del final de la partida, difiere ligeramente del normal -->
 <template>
     <main class="contenedor">
         <div class="error-handling"></div>
@@ -39,6 +40,8 @@
 
 <script>
 export default {
+    //los datos manejan las celdas, rows y el tablero. El array de condiciones de victoria guarda qué combinaciones de celdas dan victoria.
+    //puesto que esto es el final, la dificultad es siempre 3.
     data() {
         return {
             cell1: null,
@@ -59,6 +62,7 @@ export default {
             winner: null,
         };
     },
+    //en general todo esto es como el tic tac toe normal.
     computed: {
         whatMonsterStage() {
             return this.$store.getters.getMonsterStage;
@@ -185,7 +189,8 @@ export default {
 
             return false;
         },
-
+//el código difiere un poco aquí. El mensaje de victoria/empate/derrota es diferente y sus consecuencias también.
+//si ganas no pasa nada, si pierdes o empatas el monstruo pierde vida.
         handleVictory(ganador) {
             this.$store.dispatch('setGamesPlayed', this.$store.getters.getGamesPlayed+1);
             let winDif = document.querySelector('.win-control');
@@ -230,7 +235,7 @@ export default {
             document.querySelector('.boton-inicio').disabled = false;
 
         },
-
+//el exit por supuesto te lleva a la siguiente parte de la secuencia final.
         exit() {
 
             this.$store.dispatch('setFinishStage', 6)

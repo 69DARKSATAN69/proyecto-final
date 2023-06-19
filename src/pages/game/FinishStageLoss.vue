@@ -1,3 +1,4 @@
+<!-- sencillamente pierdes y termina la partida. hazlo mejor la proxima vez! -->
 <template>
 <base-card>
 <h1>You and your friends are dead. Game over.</h1>
